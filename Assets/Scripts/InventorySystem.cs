@@ -53,7 +53,6 @@ public class InventorySystem : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.B) && !isOpen)
         {
-            Debug.Log("B is pressed");
             InventoryScreen.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
             isOpen = true;

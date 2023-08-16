@@ -19,7 +19,7 @@ public class MoveMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (InventorySystem.instance.isOpen == false) {
+        if (InventorySystem.instance.isOpen == false && CraftingSystem.Instance.isOpen == false) {
             float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
             float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
