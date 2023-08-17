@@ -8871,7 +8871,7 @@ GameObject:
   - component: {fileID: 565391713}
   - component: {fileID: 565391712}
   m_Layer: 5
-  m_Name: Req1
+  m_Name: AxeReq1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10748,7 +10748,7 @@ GameObject:
   - component: {fileID: 651871949}
   - component: {fileID: 651871948}
   m_Layer: 5
-  m_Name: Req2
+  m_Name: AxeReq2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26044,6 +26044,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryScreen: {fileID: 1659557576}
   InventoryBag: {fileID: 311072257}
+  CraftingScreen: {fileID: 1789216629}
+  CraftingCategoriesScreen: {fileID: 1242577051}
   slotList: []
   itemList: []
   isOpen: 0
@@ -26136,7 +26138,7 @@ GameObject:
   - component: {fileID: 1644393452}
   - component: {fileID: 1644393451}
   m_Layer: 5
-  m_Name: Button
+  m_Name: craftAxeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

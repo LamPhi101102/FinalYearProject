@@ -10,6 +10,8 @@ public class InventorySystem : MonoBehaviour
 
     public GameObject InventoryScreen;
     public GameObject InventoryBag;
+    public GameObject CraftingScreen;
+    public GameObject CraftingCategoriesScreen;
     public List<GameObject> slotList = new List<GameObject>();
     public List<string> itemList = new List<string>();
 
@@ -54,12 +56,15 @@ public class InventorySystem : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.B) && !isOpen)
         {
             InventoryScreen.SetActive(true);
+            CraftingScreen.SetActive(false);
+            CraftingCategoriesScreen.SetActive(false);
+            CraftingSystem.Instance.isOpen = false;
             Cursor.lockState = CursorLockMode.None;
             isOpen = true;
         }else if(Input.GetKeyDown(KeyCode.B) &&  isOpen)
         {
             InventoryScreen.SetActive(false);
-            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.lockState = CursorLockMode.Locked;       
             isOpen = false;
         }
         else if (Input.GetKeyDown(KeyCode.Escape) && isOpen)
@@ -111,6 +116,38 @@ public class InventorySystem : MonoBehaviour
         else
         {
             return false;
+        }   
+    }
+
+    public void RemoveItem(string nameToRemove, int amountToRemove)
+    {
+        int counter = amountToRemove;
+        for (var i = slotList.Count - 1; i >= 0; i--)
+        {
+            if (slotList[i].transform.childCount > 1)
+            {
+                if (slotList[i].transform.GetChild(1).name == nameToRemove + "(Clone)" && counter != 0)
+                {
+                    Destroy(slotList[i].transform.GetChild(1).gameObject);
+                    counter -= 1;
+                }
+            }
+        }
+    }
+
+    public void ReCalculateList()
+    {
+        itemList.Clear();
+        foreach (GameObject slot in slotList)
+        {
+            if (slot.transform.childCount > 1)
+            {
+                string name = slot.transform.GetChild(1).name; // Stone (Clone)
+                string str2 = "(Clone)";
+
+                string result = name.Replace(str2, "");
+                itemList.Add(result);
+            }
         }
     }
 }
