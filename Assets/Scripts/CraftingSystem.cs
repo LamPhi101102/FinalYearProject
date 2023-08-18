@@ -93,7 +93,7 @@ public class CraftingSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RefreshNeededItems();
+        //RefreshNeededItems();
 
         if (Input.GetKeyDown(KeyCode.I) && !isOpen)
         {

@@ -83,6 +83,9 @@ public class InventorySystem : MonoBehaviour
         itemToAdd = Instantiate(Resources.Load<GameObject>(ItemName), whatSlotToEquip.transform.position, whatSlotToEquip.transform.rotation);
         itemToAdd.transform.SetParent(whatSlotToEquip.transform);
         itemList.Add(ItemName);
+
+        ReCalculateList();
+        CraftingSystem.Instance.RefreshNeededItems();
     }
 
     private GameObject FindNextEmptySlot()
@@ -133,6 +136,8 @@ public class InventorySystem : MonoBehaviour
                 }
             }
         }
+        ReCalculateList();
+        CraftingSystem.Instance.RefreshNeededItems();
     }
 
     public void ReCalculateList()
