@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 7296429424944210687}
   m_Layer: 0
   m_Name: Axe_002
-  m_TagString: Untagged
+  m_TagString: Pickable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

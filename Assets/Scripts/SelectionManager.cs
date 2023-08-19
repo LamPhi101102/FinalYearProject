@@ -12,6 +12,13 @@ public class SelectionManager : MonoBehaviour
 
     public GameObject Interaction_info_UI;
     Text interaction_text;
+
+
+    public Image centerDotIcon;
+    public Image centerhandIcon;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -59,6 +66,18 @@ public class SelectionManager : MonoBehaviour
                 // turn on the Text component and display Text to main screen
                 Interaction_info_UI.SetActive(true);
                 interaction_text.text = interactable.GetItemName();
+
+                if (interactable.CompareTag("Pickable"))
+                {
+                    centerDotIcon.gameObject.SetActive(false);
+                    centerhandIcon.gameObject.SetActive(true);
+                }
+                else
+                {              
+                    centerhandIcon.gameObject.SetActive(false);
+                    centerDotIcon.gameObject.SetActive(true);
+                }
+
             }
             else
             {
@@ -66,6 +85,8 @@ public class SelectionManager : MonoBehaviour
                 onTarget = false;
                 // turn off the Text component (there is a hit without an Interactable script)
                 Interaction_info_UI.SetActive(false);
+                centerhandIcon.gameObject.SetActive(false);
+                centerDotIcon.gameObject.SetActive(true);
             }
         }
         else
@@ -74,6 +95,8 @@ public class SelectionManager : MonoBehaviour
             onTarget = false;
             // if there is no hit at all
             Interaction_info_UI.SetActive(false);
+            centerhandIcon.gameObject.SetActive(false);
+            centerDotIcon.gameObject.SetActive(true); 
         }
     }
 }
