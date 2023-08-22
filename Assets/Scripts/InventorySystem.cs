@@ -94,17 +94,24 @@ public class InventorySystem : MonoBehaviour
         itemList.Add(ItemName);
 
         TriggerPickupPopUp(ItemName, itemToAdd.GetComponent<Image>().sprite);
-         
+
+        StartCoroutine(ClosePickupAlertAfterDelay());
 
         ReCalculateList();
         CraftingSystem.Instance.RefreshNeededItems();
+    }
+
+    IEnumerator ClosePickupAlertAfterDelay()
+    {
+        yield return new WaitForSeconds(2f); // Wait for 3 seconds
+        pickupAlert.SetActive(false); // Deactivate the pickupAlert
     }
 
     void TriggerPickupPopUp(string itemName, Sprite itemSprite)
     {
         pickupAlert.SetActive(true);
         pickupName.text = itemName + " x 1";
-        pickupImage.sprite = itemSprite;
+        pickupImage.sprite = itemSprite;   
     }
 
 
