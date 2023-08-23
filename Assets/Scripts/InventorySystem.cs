@@ -103,7 +103,7 @@ public class InventorySystem : MonoBehaviour
 
     IEnumerator ClosePickupAlertAfterDelay()
     {
-        yield return new WaitForSeconds(2f); // Wait for 3 seconds
+        yield return new WaitForSeconds(1f); // Wait for 3 seconds
         pickupAlert.SetActive(false); // Deactivate the pickupAlert
     }
 
