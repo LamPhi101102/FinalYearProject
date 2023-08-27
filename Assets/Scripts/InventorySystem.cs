@@ -5,10 +5,14 @@ using UnityEngine;
 using Debug = UnityEngine.Debug;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class InventorySystem : MonoBehaviour
 {
+    public GameObject itemInfoUi;
+
     public static InventorySystem instance { get; set; }
+
 
     public GameObject InventoryScreen;
     public GameObject InventoryBag;

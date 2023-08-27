@@ -468,6 +468,7 @@
 "Assets/Scripts/DragDrop.cs"
 "Assets/Scripts/HealthBoard.cs"
 "Assets/Scripts/InteractableObject.cs"
+"Assets/Scripts/InventoryItem.cs"
 "Assets/Scripts/InventorySystem.cs"
 "Assets/Scripts/ItemSlot.cs"
 "Assets/Scripts/Minimap.cs"
