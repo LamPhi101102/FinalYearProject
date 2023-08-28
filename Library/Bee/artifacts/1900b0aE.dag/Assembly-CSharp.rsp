@@ -480,6 +480,7 @@
 "Assets/Scripts/StaminaBoard.cs"
 "Assets/Scripts/Testing.cs"
 "Assets/Scripts/TimeController.cs"
+"Assets/Scripts/TrashSlot.cs"
 -langversion:9.0
 
 /deterministic

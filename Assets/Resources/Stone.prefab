@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7446445024268268078}
   - component: {fileID: 3101383744348858308}
   - component: {fileID: -8502278709070711457}
+  - component: {fileID: 8594628130384957747}
   m_Layer: 5
   m_Name: Stone
   m_TagString: Untagged
@@ -102,3 +103,23 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &8594628130384957747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7446445024268268064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b664109173f035c478624cbcc7e80e3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isTrashable: 1
+  thisName: Stone
+  thisDescription: We can use it to create many weapons
+  thisFunctionality: Crafting
+  isConsumable: 0
+  healthEffect: 0
+  staminaEffect: 0
+  calorieseffect: 0
