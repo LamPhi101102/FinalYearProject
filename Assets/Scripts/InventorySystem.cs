@@ -162,7 +162,7 @@ public class InventorySystem : MonoBehaviour
             {
                 if (slotList[i].transform.GetChild(1).name == nameToRemove + "(Clone)" && counter != 0)
                 {
-                    Destroy(slotList[i].transform.GetChild(1).gameObject);
+                    DestroyImmediate(slotList[i].transform.GetChild(1).gameObject);
                     counter -= 1;
                 }
             }

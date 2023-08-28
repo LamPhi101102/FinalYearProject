@@ -59,7 +59,7 @@ public class PlayerState : MonoBehaviour
     }
 
         // Update is called once per frame
-        void Update()
+    void Update()
     {
         // get the distance
         distanceTravelled += Vector3.Distance(playerBody.transform.position, lastPosition);
@@ -79,4 +79,21 @@ public class PlayerState : MonoBehaviour
             currentHP -= 10;
         }
     }
+
+    // set new HP
+    public void setHealth(float newHP)
+    {
+        currentHP = newHP;
+    }
+    // Set New Stamina
+    public void setStamina(float newStamina)
+    {
+        currentStamina = newStamina;
+    }
+    // Set New Calories
+    public void setCalories(float newCalories)
+    {
+        currentCaloriesPercent = newCalories;
+    }
+
 }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7446445024268268078}
   - component: {fileID: 3101383744348858308}
   - component: {fileID: -8502278709070711457}
+  - component: {fileID: -8488878597013166423}
   m_Layer: 5
   m_Name: Stick
   m_TagString: Untagged
@@ -68,7 +69,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7563a626bc3944f40b6b1678a6daa766, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 63af52b5b92b10c4594f1085a1a0ab94, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -102,3 +103,23 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &-8488878597013166423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7446445024268268064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b664109173f035c478624cbcc7e80e3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isTrashable: 0
+  thisName: Stick
+  thisDescription: A Stick can use to create a weapon
+  thisFunctionality: Crafting
+  isConsumable: 1
+  healthEffect: 10
+  staminaEffect: 5
+  calorieseffect: 5

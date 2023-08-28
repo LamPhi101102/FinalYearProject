@@ -4685,7 +4685,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4f033cdd2b09f9a43b139729d09d002c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fdaa702100942474b96dcde34cb72803, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -14900,7 +14900,7 @@ GameObject:
   - component: {fileID: 736664834}
   m_Layer: 5
   m_Name: Slot 40 Frame
-  m_TagString: Slot
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29321,7 +29321,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1007, y: -392.64948}
+  m_AnchoredPosition: {x: 1015, y: 394}
   m_SizeDelta: {x: 491.7128, y: 188.4864}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1563646131
@@ -31413,7 +31413,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1659557577
 RectTransform:
   m_ObjectHideFlags: 0
@@ -31432,7 +31432,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4566.8994, y: 807}
+  m_AnchoredPosition: {x: 4566.8994, y: 346}
   m_SizeDelta: {x: 913.3755, y: 601.171}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1659557578
