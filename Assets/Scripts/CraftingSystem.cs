@@ -99,9 +99,15 @@ public class CraftingSystem : MonoBehaviour
         {
             CraftingScreen.SetActive(true);
             InventoryScreen.SetActive(false);
+
             InventorySystem.instance.isOpen = false;
             Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             isOpen = true;
+
+            SelectionManager.Instance.DisableSelection();
+            SelectionManager.Instance.GetComponent<SelectionManager>().enabled = false;
+            
         }
         else if (Input.GetKeyDown(KeyCode.I) && isOpen)
         {
@@ -109,6 +115,10 @@ public class CraftingSystem : MonoBehaviour
             CraftingCategoriesScreen.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
             isOpen = false;
+            Cursor.visible = false;
+
+            SelectionManager.Instance.EnableSelection();
+            SelectionManager.Instance.GetComponent<SelectionManager>().enabled = true;
         }
         else if (Input.GetKeyDown(KeyCode.Escape) && isOpen)
         {
@@ -116,6 +126,10 @@ public class CraftingSystem : MonoBehaviour
             CraftingCategoriesScreen.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
             isOpen = false;
+            Cursor.visible = false;
+
+            SelectionManager.Instance.EnableSelection();
+            SelectionManager.Instance.GetComponent<SelectionManager>().enabled = true;
         }
     }
 

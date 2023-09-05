@@ -49,6 +49,8 @@ public class InventorySystem : MonoBehaviour
     {
         isOpen = false;
         PopulateSlotList();
+
+        Cursor.visible = false;
     }
 
     private void PopulateSlotList()
@@ -73,18 +75,31 @@ public class InventorySystem : MonoBehaviour
             CraftingCategoriesScreen.SetActive(false);
             CraftingSystem.Instance.isOpen = false;
             Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             isOpen = true;
-        }else if(Input.GetKeyDown(KeyCode.B) &&  isOpen)
+
+            SelectionManager.Instance.DisableSelection();
+            SelectionManager.Instance.GetComponent<SelectionManager>().enabled = false;
+        }
+        else if(Input.GetKeyDown(KeyCode.B) &&  isOpen)
         {
             InventoryScreen.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;       
             isOpen = false;
+            Cursor.visible = false;
+
+            SelectionManager.Instance.EnableSelection();
+            SelectionManager.Instance.GetComponent<SelectionManager>().enabled = true;
         }
         else if (Input.GetKeyDown(KeyCode.Escape) && isOpen)
         {
             InventoryScreen.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
             isOpen = false;
+            Cursor.visible = false;
+
+            SelectionManager.Instance.EnableSelection();
+            SelectionManager.Instance.GetComponent<SelectionManager>().enabled = true;
         }
     }
 

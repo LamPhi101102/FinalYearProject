@@ -99,4 +99,21 @@ public class SelectionManager : MonoBehaviour
             centerDotIcon.gameObject.SetActive(true); 
         }
     }
+
+    // Create a method in order to disable pick up item when opening inventory
+    public void DisableSelection()
+    {
+        centerhandIcon.enabled = false;
+        centerDotIcon.enabled = false;
+        Interaction_info_UI.SetActive(false);
+
+        selectedObject = null;
+    }
+    // Create a method to allow pick up when closing inventory bag
+    public void EnableSelection()
+    {
+        centerhandIcon.enabled = true;
+        centerDotIcon.enabled = true;
+        Interaction_info_UI.SetActive(true);
+    }
 }

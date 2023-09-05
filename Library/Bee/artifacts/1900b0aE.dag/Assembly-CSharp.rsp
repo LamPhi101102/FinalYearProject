@@ -466,6 +466,7 @@
 "Assets/Scripts/CaloriesBoard.cs"
 "Assets/Scripts/CraftingSystem.cs"
 "Assets/Scripts/DragDrop.cs"
+"Assets/Scripts/EquipSystem.cs"
 "Assets/Scripts/HealthBoard.cs"
 "Assets/Scripts/InteractableObject.cs"
 "Assets/Scripts/InventoryItem.cs"
