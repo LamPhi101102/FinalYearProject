@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using UnityEngine.EventSystems;
 
 public class EquipSystem : MonoBehaviour
 {
@@ -8,7 +11,13 @@ public class EquipSystem : MonoBehaviour
 
     public GameObject quickSlotsPanel;
     public List<GameObject> quickSlotsList = new List<GameObject>();
-    public List<string> itemList = new List<string>();
+
+
+    public GameObject numberHolder;
+
+    // it is not select because it is not in range of quickslot
+    public int selectedNumber = -1;
+    public GameObject selectedItem;
 
 
     private void Awake()
@@ -28,6 +37,102 @@ public class EquipSystem : MonoBehaviour
         PopulateSlotList();
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            SelectQuickSlot(1);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            SelectQuickSlot(2);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            SelectQuickSlot(3);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            SelectQuickSlot(4);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            SelectQuickSlot(5);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            SelectQuickSlot(6);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            SelectQuickSlot(7);
+        }
+    }
+
+    void SelectQuickSlot(int number)
+    {
+        if (checkIfSlotisFull(number) == true)
+        {
+            if (selectedNumber != number)
+            {
+                selectedNumber = number;
+                // Unselected previously selected item
+                if (selectedItem != null)
+                {
+                    selectedItem.gameObject.GetComponent<InventoryItem>().isSelected = false;
+                }
+                selectedItem = getSelectedItem(number);
+                selectedItem.GetComponent<InventoryItem>().isSelected = true;
+
+                // Changing the color
+                foreach (Transform child in numberHolder.transform)
+                {
+                    child.transform.Find("Number").GetComponent<TextMeshProUGUI>().color = Color.white;
+                }
+
+                TextMeshProUGUI toBeChanged = numberHolder.transform.Find("QuickSlotNumberFrame"+number).transform.Find("Number").GetComponent<TextMeshProUGUI>();
+                toBeChanged.color = Color.yellow;
+            }
+            // we are trying to select the same slot
+            else
+            {
+                // nothing selected
+                selectedNumber = -1;
+                // Unselected previously selected item
+                if (selectedItem != null)
+                {
+                    selectedItem.gameObject.GetComponent<InventoryItem>().isSelected = false;
+                    selectedItem = null;
+                }
+                // Changing the color
+                foreach (Transform child in numberHolder.transform)
+                {
+                    child.transform.Find("Number").GetComponent<TextMeshProUGUI>().color = Color.white;
+                }
+
+            }
+        }    
+    }
+
+    GameObject getSelectedItem(int slotNumber)
+    {
+        return quickSlotsList[slotNumber - 1].transform.GetChild(1).gameObject;
+    }
+
+
+    bool checkIfSlotisFull(int slotNumber)
+    {
+        if (quickSlotsList[slotNumber - 1].transform.childCount > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
     private void PopulateSlotList()
     {
         foreach (Transform child in quickSlotsPanel.transform)
@@ -44,9 +149,6 @@ public class EquipSystem : MonoBehaviour
         GameObject availableSlot = FindNextEmptySlot();
         // set Transform of our object
         itemToEquip.transform.SetParent(availableSlot.transform, false);
-        // Getting Clean name
-        string cleanName = itemToEquip.name.Replace("(Clone)","");
-        itemList.Add(cleanName);
 
         InventorySystem.instance.ReCalculateList();
     }

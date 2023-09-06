@@ -23,6 +23,11 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public float staminaEffect;
     public float calorieseffect;
 
+    public bool isEquippable;
+    private GameObject itempendingEquipping;
+    public bool isInsideQuickSlot;
+
+    public bool isSelected;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +37,20 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         itemInfoUI_itemDescription = itemInfoUI.transform.Find("ItemDescription").GetComponent<TextMeshProUGUI>();
         itemInfoUI_itemFunctionality = itemInfoUI.transform.Find("ItemFunctionality").GetComponent<TextMeshProUGUI>();
     }
+
+    void Update()
+    {
+        if (isSelected)
+        {
+            gameObject.GetComponent<DragDrop>().enabled = false;
+        }
+        else
+        {
+            gameObject.GetComponent<DragDrop>().enabled = true;
+        }
+    }
+
+
     // Event when we hover an item in inventory bag
     // it will open the itemInfoUI
     // Here it will get the text from itemInfoUI and then set the text follow the InventoryItem Script
@@ -59,7 +78,14 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 itemPendingConsumption = gameObject;
                 consumingFunction(healthEffect, staminaEffect, calorieseffect);
             }
+
+            if (isEquippable && isInsideQuickSlot == false && EquipSystem.Instance.CheckIfFull() == false)
+            {
+                EquipSystem.Instance.AddToQuickSlots(gameObject);
+                isInsideQuickSlot = true; 
+            }
         }
+
     }
     // Event when we right click on an item in inventory
     // it will destroy this item and refresh inventory
@@ -137,11 +163,5 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 PlayerState.Instance.setCalories(caloriesBeforeConsumption + caloriesEffect);
             }
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-       
     }
 }

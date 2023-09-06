@@ -798,7 +798,7 @@ GameObject:
   - component: {fileID: 51918336}
   - component: {fileID: 51918335}
   m_Layer: 5
-  m_Name: QuickSlot 2 Number Frame
+  m_Name: QuickSlotNumberFrame2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -875,7 +875,7 @@ GameObject:
   - component: {fileID: 56959045}
   - component: {fileID: 56959044}
   m_Layer: 5
-  m_Name: QuickSlot 3 Number Frame
+  m_Name: QuickSlotNumberFrame3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1014,7 +1014,7 @@ GameObject:
   - component: {fileID: 67711489}
   - component: {fileID: 67711488}
   m_Layer: 5
-  m_Name: QuickSlot 6 Number Frame
+  m_Name: QuickSlotNumberFrame6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1291,7 +1291,7 @@ GameObject:
   - component: {fileID: 78138873}
   - component: {fileID: 78138872}
   m_Layer: 5
-  m_Name: Number QSlot 6
+  m_Name: Number
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3819,7 +3819,7 @@ GameObject:
   - component: {fileID: 213829630}
   - component: {fileID: 213829629}
   m_Layer: 5
-  m_Name: QuickSlot 7 Number Frame
+  m_Name: QuickSlotNumberFrame7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7031,6 +7031,9 @@ MonoBehaviour:
   quickSlotsPanel: {fileID: 188693591}
   quickSlotsList: []
   itemList: []
+  numberHolder: {fileID: 126225961}
+  selectedNumber: -1
+  selectedItem: {fileID: 0}
 --- !u!1 &376595508
 GameObject:
   m_ObjectHideFlags: 0
@@ -7713,7 +7716,7 @@ GameObject:
   - component: {fileID: 423587849}
   - component: {fileID: 423587848}
   m_Layer: 5
-  m_Name: Number QSlot 5
+  m_Name: Number
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9186,7 +9189,7 @@ GameObject:
   - component: {fileID: 511033324}
   - component: {fileID: 511033323}
   m_Layer: 5
-  m_Name: QuickSlot 5 Number Frame
+  m_Name: QuickSlotNumberFrame5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10055,7 +10058,7 @@ GameObject:
   - component: {fileID: 530419275}
   - component: {fileID: 530419274}
   m_Layer: 5
-  m_Name: Number QSlot 1
+  m_Name: Number
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13394,7 +13397,7 @@ GameObject:
   - component: {fileID: 676766732}
   - component: {fileID: 676766731}
   m_Layer: 5
-  m_Name: Number QSlot 3
+  m_Name: Number
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14017,7 +14020,7 @@ GameObject:
   - component: {fileID: 693462952}
   - component: {fileID: 693462951}
   m_Layer: 5
-  m_Name: Number QSlot 2
+  m_Name: Number
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21665,7 +21668,7 @@ GameObject:
   - component: {fileID: 1138620061}
   - component: {fileID: 1138620060}
   m_Layer: 5
-  m_Name: Number QSlot 4
+  m_Name: Number
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25725,7 +25728,7 @@ GameObject:
   - component: {fileID: 1327683999}
   - component: {fileID: 1327683998}
   m_Layer: 5
-  m_Name: QuickSlot 4 Number Frame
+  m_Name: QuickSlotNumberFrame4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25802,7 +25805,7 @@ GameObject:
   - component: {fileID: 1329358042}
   - component: {fileID: 1329358041}
   m_Layer: 5
-  m_Name: QuickSlot 1 Number Frame
+  m_Name: QuickSlotNumberFrame1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36469,7 +36472,7 @@ GameObject:
   - component: {fileID: 1883539088}
   - component: {fileID: 1883539087}
   m_Layer: 5
-  m_Name: Number QSlot 7
+  m_Name: Number
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
