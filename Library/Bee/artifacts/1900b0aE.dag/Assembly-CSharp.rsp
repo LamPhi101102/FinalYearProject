@@ -462,6 +462,7 @@
 "Assets/Package Downloaded/Rabbits/Demo/Scripts/AnimatorParamatersChange.cs"
 "Assets/Package Downloaded/Rocks and Boulders 2/Shaders/RotateGameObject.cs"
 "Assets/Scripts/AI_Movement.cs"
+"Assets/Scripts/AnimatorGet.cs"
 "Assets/Scripts/BluePrint.cs"
 "Assets/Scripts/CaloriesBoard.cs"
 "Assets/Scripts/CraftingSystem.cs"

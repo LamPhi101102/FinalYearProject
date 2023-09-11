@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public CharacterController controller;
+    private bool isJumping;
+    public Animator animator;
 
     public float speed = 12f;
     public float gravity = -9.81f * 2;
@@ -20,6 +22,12 @@ public class PlayerMovement : MonoBehaviour
     bool isGrounded;
     bool isMoving;
 
+
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+
     void Update()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
@@ -32,10 +40,12 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 move = transform.right * x + transform.forward * z;
 
+        // Pressing Down
         if (Input.GetKeyDown("w"))
         {
             isMoving = true;
         }
+        // Pressing Up
         if (Input.GetKeyUp("w"))
         {
             isMoving = false;
