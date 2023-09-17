@@ -17,6 +17,7 @@ public class SelectionManager : MonoBehaviour
     public Image centerDotIcon;
     public Image centerhandIcon;
 
+    public LayerMask PlayerLayerMask;
 
 
     // Start is called before the first frame update
@@ -45,12 +46,19 @@ public class SelectionManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        // Create a layer mask to exclude the "Player" layer
+        LayerMask raycastLayerMask = PlayerLayerMask.value;
+
+        // Invert the layer mask to exclude the "Player" layer
+        raycastLayerMask = ~raycastLayerMask;
+
         // get the position from the main camera
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
         // the function to display and turn off the text to the main camera
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, raycastLayerMask))
         {
             // the selectionTransform will get the transfrom of the position that the main camera hit 
             var selectionTransform = hit.transform;
