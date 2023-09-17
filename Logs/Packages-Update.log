@@ -87,3 +87,29 @@ Update Mode: mergeDefaultDependencies
 
 The following packages were added:
   com.unity.render-pipelines.universal@12.1.11
+
+=== Sun Sep 17 10:50:22 2023
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were updated:
+  com.unity.inputsystem from version 1.4.4 to 1.5.1
+  com.unity.render-pipelines.universal from version 12.1.6 to 12.1.11
+
+=== Sun Sep 17 10:50:23 2023
+
+Packages were changed.
+Update Mode: mergeDefaultDependencies
+
+The following packages were added:
+  com.unity.inputsystem@1.5.1
+
+=== Sun Sep 17 10:52:48 2023
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were updated:
+  com.unity.inputsystem from version 1.4.4 to 1.5.1
+  com.unity.render-pipelines.universal from version 12.1.6 to 12.1.11
