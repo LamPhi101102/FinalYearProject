@@ -476,6 +476,8 @@
 "Assets/Package Downloaded/Devion Games/Utilities/Scripts/Editor/UtilityInstanceWindow.cs"
 "Assets/Package Downloaded/Devion Games/Utilities/Scripts/Editor/UtilityWindow.cs"
 "Assets/Package Downloaded/StarterAssets/TutorialInfo/Scripts/Editor/ReadmeEditor.cs"
+"Assets/Package Downloaded/TheTalesFactory/Photoscanned MoutainsRocks PBR/_ReadMe & Publisher Window/Inspector Info/Scripts/Editor/PublisherReadmeEditor.cs"
+"Assets/Package Downloaded/TheTalesFactory/Photoscanned MoutainsRocks PBR/_ReadMe & Publisher Window/Welcome Screen/Scripts/Editor/PublisherWelcomeScreen.cs"
 -langversion:9.0
 
 /deterministic
