@@ -39,7 +39,7 @@ public class EquipSystem : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        /*if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             SelectQuickSlot(1);
         }
@@ -66,7 +66,7 @@ public class EquipSystem : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Alpha7))
         {
             SelectQuickSlot(7);
-        }
+        }*/
     }
 
     void SelectQuickSlot(int number)
