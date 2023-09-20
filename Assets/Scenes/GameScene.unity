@@ -2974,6 +2974,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4534147065827568, guid: 5187dfa4d8f19524e8bbf7c6894b7de7, type: 3}
   m_PrefabInstance: {fileID: 2036640106}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &136213838 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4416926081852918481, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
+  m_PrefabInstance: {fileID: 1202278192}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &138431444
 GameObject:
   m_ObjectHideFlags: 0
@@ -39193,8 +39198,8 @@ MonoBehaviour:
   currentHP: 0
   maxHP: 100
   currentStamina: 0
-  maxStamina: 20
-  playerBody: {fileID: 745839973}
+  maxStamina: 100
+  playerBody: {fileID: 136213838}
   currentCaloriesPercent: 0
   maxCaloriesPercent: 30
   isColoriesActions: 0
