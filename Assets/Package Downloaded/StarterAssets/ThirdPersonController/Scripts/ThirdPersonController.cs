@@ -1,4 +1,6 @@
-﻿ using UnityEngine;
+﻿using System.Diagnostics;
+using UnityEngine;
+using Debug = UnityEngine.Debug;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 #endif
@@ -110,6 +112,11 @@ namespace StarterAssets
 
         private bool _hasAnimator;
 
+        public GameObject arrowObject;
+        public Transform arrowPoint;
+
+        public GameObject playerFollowCamera;
+        public GameObject playerAimCamera;
         private bool IsCurrentDeviceMouse
         {
             get
@@ -168,11 +175,48 @@ namespace StarterAssets
             {
                 // Play Aim Animation
                 _animator.SetBool("Aiming", _input.isAiming);
+                _animator.SetBool("Shooting", _input.isShooting);
+                playerFollowCamera.SetActive(false);
+                playerAimCamera.SetActive(true);
             }
             else
             {
                 // Stop Aim Animation
                 _animator.SetBool("Aiming", false);
+                _animator.SetBool("Shooting", false);
+                playerFollowCamera.SetActive(true);
+                playerAimCamera.SetActive(false);
+            }
+        }
+
+        public void Shoot()
+        {
+            // Raycast from the camera to the mouse cursor position
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                // Get the direction from the character's position to the hit point
+                Vector3 shootDirection = hit.point - arrowPoint.position;
+                // Calculate the force direction (normalize to make it a unit vector)
+                Vector3 forceDirection = shootDirection.normalized;
+                // Rotate the arrow to add a 90-degree rotation to the X-axis (assuming your arrow's forward direction is along the Y-axis)
+                Quaternion newRotation = Quaternion.LookRotation(forceDirection, Vector3.up) * Quaternion.Euler(90f, 0f, 0f);
+                arrowObject.transform.rotation = newRotation;
+                // Get the direction from the character's position to the hit point
+                Vector3 moveDirection = hit.point - arrowPoint.position;
+                Vector3 forceDirection1 = moveDirection.normalized;
+                if (moveDirection != Vector3.zero)
+                {
+                    Quaternion newRotation1 = Quaternion.LookRotation(forceDirection1);
+                    transform.rotation = newRotation1;
+                }
+
+
+                // Create the arrow object
+                GameObject arrow = Instantiate(arrowObject, arrowPoint.position, newRotation);
+                arrow.GetComponent<Rigidbody>().AddForce(forceDirection * 100f, ForceMode.Impulse);
             }
         }
 
