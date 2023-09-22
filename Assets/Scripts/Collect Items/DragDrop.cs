@@ -55,7 +55,6 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
             transform.position = startPosition;
             transform.SetParent(startParent);
         }
-        Debug.Log("OnEndDrag");
         // feature of drag items and now we set it default
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;

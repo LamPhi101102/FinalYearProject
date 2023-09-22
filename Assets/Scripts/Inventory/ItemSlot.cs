@@ -24,7 +24,6 @@ public class ItemSlot : MonoBehaviour, IDropHandler
 
         if (!Item)
         {         
-
             // Check if the item being dragged is equippable
             if (DragDrop.itemBeingDragged.GetComponent<InventoryItem>().isEquippable == true)
             {
@@ -42,8 +41,10 @@ public class ItemSlot : MonoBehaviour, IDropHandler
                     InventorySystem.instance.ReCalculateList();
                 }
             }
-            else
+            else if(transform.CompareTag("Slot"))
             {
+                DragDrop.itemBeingDragged.transform.SetParent(transform);
+                DragDrop.itemBeingDragged.transform.localPosition = new Vector2(0, 0);
                 Debug.Log("Cannot drop non-equippable item into this slot.");
             }
         }

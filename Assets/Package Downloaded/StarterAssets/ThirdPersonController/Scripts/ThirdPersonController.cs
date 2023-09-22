@@ -112,7 +112,8 @@ namespace StarterAssets
 
         public GameObject InventoryScreen;
         private bool isInventoryOpen = false;
-        private bool isCameraLocked = false;
+        private bool isCameraLocked;
+        private bool isCraftingOpen;
 
         private const float _threshold = 0.01f;
 
@@ -148,6 +149,8 @@ namespace StarterAssets
 
         private void Start()
         {
+            isCameraLocked = false;
+            isCraftingOpen = false;
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
             
             _hasAnimator = TryGetComponent(out _animator);
@@ -168,8 +171,7 @@ namespace StarterAssets
 
         private void Update()
         {
-            _hasAnimator = TryGetComponent(out _animator);
-
+            _hasAnimator = TryGetComponent(out _animator);         
             JumpAndGravity();
             GroundedCheck();
             Move();
@@ -193,6 +195,24 @@ namespace StarterAssets
                 // Close the inventory
                 isCameraLocked = false;
                 isInventoryOpen = false;
+            }
+
+            if (Input.GetKeyDown(KeyCode.I) && !isCraftingOpen)
+            {
+                isCameraLocked = true;
+                isCraftingOpen = true;
+            }
+            else if (Input.GetKeyDown(KeyCode.I) && isCraftingOpen)
+            {
+                // Close the inventory
+                isCameraLocked = false;
+                isCraftingOpen = false;
+            }
+            else if (Input.GetKeyDown(KeyCode.Escape) && isCraftingOpen)
+            {
+                // Close the inventory
+                isCameraLocked = false;
+                isCraftingOpen = false;
             }
         }
         private void AimShoot()
