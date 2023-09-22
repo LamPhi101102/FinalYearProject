@@ -16,6 +16,8 @@ namespace StarterAssets
 #endif
     public class ThirdPersonController : MonoBehaviour
     {
+        public static ThirdPersonController instance { get; set; }
+
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
         public float MoveSpeed = 2.0f;
@@ -108,9 +110,14 @@ namespace StarterAssets
         private StarterAssetsInputs _input;
         private GameObject _mainCamera;
 
+        public GameObject InventoryScreen;
+        private bool isInventoryOpen = false;
+        private bool isCameraLocked = false;
+
         private const float _threshold = 0.01f;
 
         private bool _hasAnimator;
+        public bool inventoryOpen = false;
 
         public GameObject arrowObject;
         public Transform arrowPoint;
@@ -167,8 +174,27 @@ namespace StarterAssets
             GroundedCheck();
             Move();
             AimShoot();
-        }
+            // Check if the inventory is open
 
+            // Check for inventory open/close key (e.g., "B" key for open and "Escape" for close).
+            if (Input.GetKeyDown(KeyCode.B) && !isInventoryOpen)
+            {
+               isCameraLocked = true;
+                isInventoryOpen = true;
+            }
+            else if (Input.GetKeyDown(KeyCode.B) && isInventoryOpen)
+            {
+                // Close the inventory
+                isCameraLocked = false;
+                isInventoryOpen = false;
+            }
+            else if (Input.GetKeyDown(KeyCode.Escape) && isInventoryOpen)
+            {
+                // Close the inventory
+                isCameraLocked = false;
+                isInventoryOpen = false;
+            }
+        }
         private void AimShoot()
         {
             if (_input.isAiming && Grounded && !_input.sprint)
@@ -222,6 +248,7 @@ namespace StarterAssets
 
         private void LateUpdate()
         {
+
             CameraRotation();
         }
 
@@ -251,6 +278,10 @@ namespace StarterAssets
 
         private void CameraRotation()
         {
+            if (isCameraLocked)
+            {
+                return;
+            }
             // if there is an input and camera position is not fixed
             if (_input.look.sqrMagnitude >= _threshold && !LockCameraPosition)
             {

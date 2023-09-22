@@ -6,6 +6,7 @@ using Debug = UnityEngine.Debug;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
+using StarterAssets;
 
 public class InventorySystem : MonoBehaviour
 {
@@ -75,7 +76,7 @@ public class InventorySystem : MonoBehaviour
             CraftingCategoriesScreen.SetActive(false);
             CraftingSystem.Instance.isOpen = false;
             Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            Cursor.visible = true;  
             isOpen = true;
 
             SelectionManager.Instance.DisableSelection();
@@ -86,8 +87,7 @@ public class InventorySystem : MonoBehaviour
             InventoryScreen.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;       
             isOpen = false;
-            Cursor.visible = false;
-
+            Cursor.visible = false;        
             SelectionManager.Instance.EnableSelection();
             SelectionManager.Instance.GetComponent<SelectionManager>().enabled = true;
         }

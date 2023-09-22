@@ -23,19 +23,28 @@ public class ItemSlot : MonoBehaviour, IDropHandler
         Debug.Log("OnDrop");
 
         if (!Item)
-        {
-            DragDrop.itemBeingDragged.transform.SetParent(transform);
-            DragDrop.itemBeingDragged.transform.localPosition = new Vector2(0, 0);
+        {         
 
-            if(transform.CompareTag("QuickSlot") == false)
+            // Check if the item being dragged is equippable
+            if (DragDrop.itemBeingDragged.GetComponent<InventoryItem>().isEquippable == true)
             {
-                DragDrop.itemBeingDragged.GetComponent<InventoryItem>().isInsideQuickSlot = false;
-                InventorySystem.instance.ReCalculateList();
+                DragDrop.itemBeingDragged.transform.SetParent(transform);
+                DragDrop.itemBeingDragged.transform.localPosition = new Vector2(0, 0);
+
+                if (transform.CompareTag("QuickSlot") == false)
+                {
+                    DragDrop.itemBeingDragged.GetComponent<InventoryItem>().isInsideQuickSlot = false;
+                    InventorySystem.instance.ReCalculateList();
+                }
+                if (transform.CompareTag("QuickSlot"))
+                {
+                    DragDrop.itemBeingDragged.GetComponent<InventoryItem>().isInsideQuickSlot = true;
+                    InventorySystem.instance.ReCalculateList();
+                }
             }
-            if (transform.CompareTag("QuickSlot"))
+            else
             {
-                DragDrop.itemBeingDragged.GetComponent<InventoryItem>().isInsideQuickSlot = true;
-                InventorySystem.instance.ReCalculateList();
+                Debug.Log("Cannot drop non-equippable item into this slot.");
             }
         }
     }

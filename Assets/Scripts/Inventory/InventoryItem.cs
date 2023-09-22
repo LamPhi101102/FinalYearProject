@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 using TMPro;
 
 public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
+    public static InventoryItem Instance { get; set; }
     public bool isTrashable;
 
     private GameObject itemInfoUI;
@@ -79,7 +81,7 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 consumingFunction(healthEffect, staminaEffect, calorieseffect);
             }
 
-            if (isEquippable && isInsideQuickSlot == false && EquipSystem.Instance.CheckIfFull() == false)
+            if (isEquippable == true && isInsideQuickSlot == false && EquipSystem.Instance.CheckIfFull() == false)
             {
                 EquipSystem.Instance.AddToQuickSlots(gameObject);
                 isInsideQuickSlot = true; 
