@@ -10,7 +10,7 @@ public class ButtonInfo : MonoBehaviour
     public TextMeshProUGUI QuantityTxt;
     public GameObject ShopManager;
 
-    void Start()
+    void Update()
     {
         PriceTxt.text = "Price: $" + ShopManager.GetComponent<ShopManagerScript>().shopItems[2, ItemID].ToString();
         QuantityTxt.text = ShopManager.GetComponent<ShopManagerScript>().shopItems[3, ItemID].ToString();

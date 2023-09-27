@@ -9,6 +9,8 @@ TagManager:
   - Pickable
   - QuickSlot
   - CinemachineTarget
+  - Event
+  - ItemsShop
   layers:
   - Default
   - TransparentFX
