@@ -44304,6 +44304,7 @@ MonoBehaviour:
   InventoryScreen: {fileID: 1659557576}
   InventoryBag: {fileID: 311072257}
   CraftingScreen: {fileID: 1789216629}
+  ShopScreen: {fileID: 1833774048}
   CraftingCategoriesScreen: {fileID: 1242577051}
   slotList: []
   itemList: []

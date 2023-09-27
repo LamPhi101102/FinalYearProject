@@ -18,6 +18,7 @@ public class InventorySystem : MonoBehaviour
     public GameObject InventoryScreen;
     public GameObject InventoryBag;
     public GameObject CraftingScreen;
+    public GameObject ShopScreen;
     public GameObject CraftingCategoriesScreen;
     public List<GameObject> slotList = new List<GameObject>();
     public List<string> itemList = new List<string>();
@@ -26,6 +27,7 @@ public class InventorySystem : MonoBehaviour
     private GameObject whatSlotToEquip;
 
     public bool isOpen;
+    public bool isShopOpen;
 
 
     //Pickup Alert
@@ -49,6 +51,7 @@ public class InventorySystem : MonoBehaviour
     void Start()
     {
         isOpen = false;
+        isShopOpen = false;
         PopulateSlotList();
 
         Cursor.visible = false;
@@ -96,6 +99,42 @@ public class InventorySystem : MonoBehaviour
             InventoryScreen.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
             isOpen = false;
+            Cursor.visible = false;
+
+            SelectionManager.Instance.EnableSelection();
+            SelectionManager.Instance.GetComponent<SelectionManager>().enabled = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.H) && !isShopOpen)
+        {
+            ShopScreen.SetActive(true);
+            InventoryScreen.SetActive(false);
+            CraftingScreen.SetActive(false);
+            CraftingCategoriesScreen.SetActive(false);
+            CraftingSystem.Instance.isOpen = false;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            isShopOpen = true;
+
+            SelectionManager.Instance.DisableSelection();
+            SelectionManager.Instance.GetComponent<SelectionManager>().enabled = false;
+        }
+        else if (Input.GetKeyDown(KeyCode.H) && isShopOpen)
+        {
+            ShopScreen.SetActive(false);
+            InventoryScreen.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+            isShopOpen = false;
+            Cursor.visible = false;
+            SelectionManager.Instance.EnableSelection();
+            SelectionManager.Instance.GetComponent<SelectionManager>().enabled = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape) && isShopOpen)
+        {
+            ShopScreen.SetActive(false);
+            InventoryScreen.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+            isShopOpen = false;
             Cursor.visible = false;
 
             SelectionManager.Instance.EnableSelection();

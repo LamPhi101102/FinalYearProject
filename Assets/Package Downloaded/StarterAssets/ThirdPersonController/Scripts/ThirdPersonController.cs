@@ -114,6 +114,7 @@ namespace StarterAssets
         private bool isInventoryOpen = false;
         private bool isCameraLocked;
         private bool isCraftingOpen;
+        private bool isShopOpen;
 
         private const float _threshold = 0.01f;
 
@@ -151,6 +152,7 @@ namespace StarterAssets
         {
             isCameraLocked = false;
             isCraftingOpen = false;
+            isShopOpen = false;
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
             
             _hasAnimator = TryGetComponent(out _animator);
@@ -179,6 +181,7 @@ namespace StarterAssets
             // Check if the inventory is open
 
             // Check for inventory open/close key (e.g., "B" key for open and "Escape" for close).
+            // ============================ Inventory Action ======================================
             if (Input.GetKeyDown(KeyCode.B) && !isInventoryOpen)
             {
                isCameraLocked = true;
@@ -196,7 +199,7 @@ namespace StarterAssets
                 isCameraLocked = false;
                 isInventoryOpen = false;
             }
-
+            // ============================ Crafting Action ======================================
             if (Input.GetKeyDown(KeyCode.I) && !isCraftingOpen)
             {
                 isCameraLocked = true;
@@ -213,6 +216,24 @@ namespace StarterAssets
                 // Close the inventory
                 isCameraLocked = false;
                 isCraftingOpen = false;
+            }
+            // ============================ Shop Action ======================================
+            if (Input.GetKeyDown(KeyCode.H) && !isShopOpen)
+            {
+                isCameraLocked = true;
+                isShopOpen = true;
+            }
+            else if (Input.GetKeyDown(KeyCode.H) && isShopOpen)
+            {
+                // Close the inventory
+                isCameraLocked = false;
+                isShopOpen = false;
+            }
+            else if (Input.GetKeyDown(KeyCode.Escape) && isShopOpen)
+            {
+                // Close the inventory
+                isCameraLocked = false;
+                isShopOpen = false;
             }
         }
         private void AimShoot()
