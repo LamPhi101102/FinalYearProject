@@ -5,6 +5,9 @@ using System.Diagnostics;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
+using UnityEngine.UI;
+using TMPro;
+using static System.Net.Mime.MediaTypeNames;
 
 public class InteractableObject : MonoBehaviour
 {
@@ -20,6 +23,13 @@ public class InteractableObject : MonoBehaviour
 
     public bool playerInRange;
     public string ItemName;
+
+
+
+    public GameObject pickupAlert;
+    public TextMeshProUGUI pickupName;
+
+
     public string GetItemName()
     {
         return ItemName;
@@ -50,7 +60,10 @@ public class InteractableObject : MonoBehaviour
                 Destroy(chestLocked, 3.0f);
                 int coins = GenerateCoinsCommonChest();
                 Debug.Log(coins);
+                TriggerPickupPopUpCoins("Coin: ", coins);           
                 shopManager.AddCoins(coins);
+
+                ClosePickupAlertAfterDelay();
             }
             else if (gameObject.CompareTag("ExquisiteChest"))
             {
@@ -61,6 +74,8 @@ public class InteractableObject : MonoBehaviour
                 Destroy(chestLocked, 3.0f);
                 int coins = GenerateCoinsExquisiteChest();
                 Debug.Log(coins);
+                TriggerPickupPopUpCoins("Coin: ", coins);
+                ClosePickupAlertAfterDelay();
                 shopManager.AddCoins(coins);
             }
             else if (gameObject.CompareTag("PreciousChest"))
@@ -72,6 +87,8 @@ public class InteractableObject : MonoBehaviour
                 Destroy(chestLocked, 3.0f);
                 int coins = GenerateCoinsPreciousChest();
                 Debug.Log(coins);
+                TriggerPickupPopUpCoins("Coin: ", coins);
+                ClosePickupAlertAfterDelay();
                 shopManager.AddCoins(coins);
             }
             else
@@ -80,6 +97,22 @@ public class InteractableObject : MonoBehaviour
             }          
         }
     }
+    public void ClosePickupAlertAfterDelay()
+    {
+        Invoke("closePickupAlertCoins", 2f);
+    }
+
+    private void closePickupAlertCoins()
+    {
+        Debug.Log("Closing pickup alert.");
+        pickupAlert.SetActive(false);
+    }
+
+    void TriggerPickupPopUpCoins(string coins, int coinsAlert)
+    {
+        pickupAlert.SetActive(true);
+        pickupName.text = coins + " x " + coinsAlert;
+    }
 
     public void DeleteObjectAfterDelay(float delay)
     {
@@ -87,6 +120,7 @@ public class InteractableObject : MonoBehaviour
         Destroy(chestOpen, delay);
     }
 
+    // ========================================== Trigger ===================================================
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -103,6 +137,7 @@ public class InteractableObject : MonoBehaviour
         }
     }
 
+    // =========================================== Random Coins =============================================
     public int GenerateCoinsCommonChest()
     {
         return Random.Range(5, 10);
