@@ -1,16 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
+using Random = UnityEngine.Random;
 
 public class InteractableObject : MonoBehaviour
 {
+    public static InteractableObject Instance { get; set; }
+
     private Animator animator;
 
     public GameObject chestLocked;
     public GameObject chestOpen;
-
+    public bool isOpenChest;
+    public ShopManagerScript shopManager;
     public float delay = 3.0f;
 
     public bool playerInRange;
@@ -18,6 +23,10 @@ public class InteractableObject : MonoBehaviour
     public string GetItemName()
     {
         return ItemName;
+    }
+    void Start()
+    {
+        isOpenChest = false;
     }
 
 
@@ -34,24 +43,36 @@ public class InteractableObject : MonoBehaviour
             }
             else if (gameObject.CompareTag("CommonChest"))
             {
+                isOpenChest = true;
                 chestLocked.SetActive(false);
                 chestOpen.SetActive(true);
                 Destroy(chestOpen, 3.0f);
                 Destroy(chestLocked, 3.0f);
+                int coins = GenerateCoinsCommonChest();
+                Debug.Log(coins);
+                shopManager.AddCoins(coins);
             }
             else if (gameObject.CompareTag("ExquisiteChest"))
             {
+                isOpenChest = true;
                 chestLocked.SetActive(false);
                 chestOpen.SetActive(true);
                 Destroy(chestOpen, 3.0f);
                 Destroy(chestLocked, 3.0f);
+                int coins = GenerateCoinsExquisiteChest();
+                Debug.Log(coins);
+                shopManager.AddCoins(coins);
             }
             else if (gameObject.CompareTag("PreciousChest"))
             {
+                isOpenChest = true;
                 chestLocked.SetActive(false);
                 chestOpen.SetActive(true);
                 Destroy(chestOpen, 3.0f);
                 Destroy(chestLocked, 3.0f);
+                int coins = GenerateCoinsPreciousChest();
+                Debug.Log(coins);
+                shopManager.AddCoins(coins);
             }
             else
             {
@@ -82,5 +103,16 @@ public class InteractableObject : MonoBehaviour
         }
     }
 
-
+    public int GenerateCoinsCommonChest()
+    {
+        return Random.Range(5, 10);
+    }
+    public int GenerateCoinsExquisiteChest()
+    {
+        return Random.Range(50, 100);
+    }
+    public int GenerateCoinsPreciousChest()
+    {
+        return Random.Range(300, 500);
+    }
 }

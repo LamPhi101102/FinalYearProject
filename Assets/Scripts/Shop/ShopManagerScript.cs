@@ -63,6 +63,10 @@ public class ShopManagerScript : MonoBehaviour
         shopItems[3, 12] = 0;
 
     }
+    void Update()
+    {
+        
+    }
 
     public void Buy()
     {
@@ -76,5 +80,10 @@ public class ShopManagerScript : MonoBehaviour
             coinsSilversTxt.text = "Coins: " + silvers.ToString();
             ButtonRef.GetComponent<ButtonInfo>().QuantityTxt.text = shopItems[3, ButtonRef.GetComponent<ButtonInfo>().ItemID].ToString();
         }
+    }
+    public void AddCoins(int amount)
+    {
+        silvers += amount;
+        coinsSilversTxt.text = "Coins: " + silvers.ToString();
     }
 }

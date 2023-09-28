@@ -11,7 +11,6 @@ using StarterAssets;
 public class InventorySystem : MonoBehaviour
 {
     public GameObject itemInfoUi;
-
     public static InventorySystem instance { get; set; }
 
 
