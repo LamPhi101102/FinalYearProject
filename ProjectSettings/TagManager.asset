@@ -11,6 +11,9 @@ TagManager:
   - CinemachineTarget
   - Event
   - ItemsShop
+  - CommonChest
+  - ExquisiteChest
+  - PreciousChest
   layers:
   - Default
   - TransparentFX
