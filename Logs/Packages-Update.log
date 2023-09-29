@@ -129,3 +129,29 @@ Update Mode: updateDependencies
 
 The following packages were updated:
   com.unity.postprocessing from version 2.3.0 to 3.2.2
+
+=== Fri Sep 29 12:24:04 2023
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were updated:
+  com.unity.collab-proxy from version 1.17.2 to 2.0.4
+  com.unity.ide.rider from version 3.0.15 to 3.0.21
+  com.unity.ide.visualstudio from version 2.0.16 to 2.0.18
+  com.unity.render-pipelines.high-definition from version 12.1.7 to 12.1.11
+  com.unity.terrain-tools from version 4.0.3 to 4.0.5
+  com.unity.timeline from version 1.6.4 to 1.6.5
+  com.unity.visualscripting from version 1.7.8 to 1.8.0
+
+=== Fri Sep 29 12:24:05 2023
+
+Packages were changed.
+Update Mode: mergeDefaultDependencies
+
+The following packages were added:
+  com.unity.render-pipelines.high-definition@12.1.11
+  com.unity.terrain-tools@4.0.5
+  com.unity.modules.nvidia@1.0.0
+The following packages were updated:
+  com.unity.cinemachine from version 2.8.9 to 2.9.1
