@@ -56,6 +56,7 @@ public class InteractableObject : MonoBehaviour
                 isOpenChest = true;
                 chestLocked.SetActive(false);
                 chestOpen.SetActive(true);
+
                 Destroy(chestOpen, 3.0f);
                 Destroy(chestLocked, 3.0f);
                 int coins = GenerateCoinsCommonChest();
