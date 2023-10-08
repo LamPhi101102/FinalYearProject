@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
@@ -115,6 +116,10 @@ namespace StarterAssets
         private bool isCameraLocked;
         private bool isCraftingOpen;
         private bool isShopOpen;
+        public bool isMenuOpen;
+        public bool isMenuContinue;
+        Button ContinueButton;
+        public GameObject menu;
 
         private const float _threshold = 0.01f;
 
@@ -153,6 +158,12 @@ namespace StarterAssets
             isCameraLocked = false;
             isCraftingOpen = false;
             isShopOpen = false;
+            isMenuOpen = false;
+            isMenuContinue = false;
+
+            ContinueButton = menu.transform.Find("ContinueButton").GetComponent<Button>();
+            ContinueButton.onClick.AddListener(delegate { CloseMenu(); });
+
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
             
             _hasAnimator = TryGetComponent(out _animator);
@@ -169,6 +180,12 @@ namespace StarterAssets
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
+        }
+
+        public void CloseMenu()
+        {
+            isCameraLocked = false;
+            isMenuOpen = false;
         }
 
         private void Update()
@@ -235,7 +252,25 @@ namespace StarterAssets
                 isCameraLocked = false;
                 isShopOpen = false;
             }
+            //============================== Menu Game ===================
+            if (Input.GetKeyDown(KeyCode.M) && !isMenuOpen)
+            {
+                isCameraLocked = true;
+                isMenuOpen = true;
+            }
+            else if (Input.GetKeyDown(KeyCode.M) && isMenuOpen)
+            {
+                isCameraLocked = false;
+                isMenuOpen = false;
+            }
+            else if (Input.GetKeyDown(KeyCode.Escape) && isMenuOpen)
+            {
+                isCameraLocked = false;
+                isMenuOpen = false;
+            }
         }
+        
+
         private void AimShoot()
         {
             if (_input.isAiming && Grounded && !_input.sprint)
