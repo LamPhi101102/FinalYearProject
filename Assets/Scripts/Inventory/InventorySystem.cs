@@ -33,6 +33,7 @@ public class InventorySystem : MonoBehaviour
     public GameObject pickupAlert;
     public TextMeshProUGUI pickupName;
     public Image pickupImage;
+    public TextMeshProUGUI pickupCountText;
 
 
     //public bool isFull;
@@ -155,7 +156,7 @@ public class InventorySystem : MonoBehaviour
         StartCoroutine(ClosePickupAlertAfterDelay());
 
         ReCalculateList();
-        CraftingSystem.Instance.RefreshNeededItems();
+        CraftingSystem.Instance.RefreshNeededItems(); 
     }
 
     IEnumerator ClosePickupAlertAfterDelay()
@@ -168,7 +169,7 @@ public class InventorySystem : MonoBehaviour
     {
         pickupAlert.SetActive(true);
         pickupName.text = itemName + " x 1";
-        pickupImage.sprite = itemSprite;   
+        pickupImage.sprite = itemSprite;
     }
 
 
@@ -196,7 +197,7 @@ public class InventorySystem : MonoBehaviour
             }      
         }
 
-        if (counter == 40)
+        if (counter == 39)
         {
             return true;
         }

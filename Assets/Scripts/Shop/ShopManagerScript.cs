@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class ShopManagerScript : MonoBehaviour
 {
     public int[,] shopItems = new int[13, 13];
+    public string[,] shopItemsResource = new string[13, 13];
     public float silvers;
     public float golds;
 
@@ -34,6 +35,8 @@ public class ShopManagerScript : MonoBehaviour
         shopItems[1, 11] = 11;
         shopItems[1, 12] = 12;
 
+        shopItemsResource[1, 8] = "Axe";
+
         // Price
         shopItems[2, 1] = 10;
         shopItems[2, 2] = 20;
@@ -48,20 +51,6 @@ public class ShopManagerScript : MonoBehaviour
         shopItems[2, 11] = 110;
         shopItems[2, 12] = 120;
 
-        // Quantity
-        shopItems[3, 1] = 0;
-        shopItems[3, 2] = 0;
-        shopItems[3, 3] = 0;
-        shopItems[3, 4] = 0;
-        shopItems[3, 5] = 0;
-        shopItems[3, 6] = 0;
-        shopItems[3, 7] = 0;
-        shopItems[3, 8] = 0;
-        shopItems[3, 9] = 0;
-        shopItems[3, 10] = 0;
-        shopItems[3, 11] = 0;
-        shopItems[3, 12] = 0;
-
     }
     void Update()
     {
@@ -71,19 +60,31 @@ public class ShopManagerScript : MonoBehaviour
     public void Buy()
     {
         GameObject ButtonRef = GameObject.FindGameObjectWithTag("ItemsShop").GetComponent<EventSystem>().currentSelectedGameObject;
-
-
         if (silvers >= shopItems[2, ButtonRef.GetComponent<ButtonInfo>().ItemID])
         {
             silvers -= shopItems[2, ButtonRef.GetComponent<ButtonInfo>().ItemID];
-            shopItems[3, ButtonRef.GetComponent<ButtonInfo>().ItemID]++;
             coinsSilversTxt.text = "Coins: " + silvers.ToString();
-            ButtonRef.GetComponent<ButtonInfo>().QuantityTxt.text = shopItems[3, ButtonRef.GetComponent<ButtonInfo>().ItemID].ToString();
+            BuyItemShop(shopItemsResource[1, 8]);
         }
     }
     public void AddCoins(int amount)
     {
         silvers += amount;
         coinsSilversTxt.text = "Coins: " + silvers.ToString();
+    }
+
+    void BuyItemShop(string ItemName)
+    {
+        // add item into inventory
+        InventorySystem.instance.AddToInventory(ItemName);
+        //refrsh list
+        StartCoroutine(calculate());
+    }
+
+    public IEnumerator calculate()
+    {
+        yield return 0;
+        InventorySystem.instance.ReCalculateList();
+        CraftingSystem.Instance.RefreshNeededItems();
     }
 }
