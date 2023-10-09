@@ -35,7 +35,8 @@ public class MenuManager : MonoBehaviour
         menu.SetActive(true);
         SaveGameMenu.SetActive(false);
         OptionMenu.SetActive(false);
-        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = true;
         menuCanvas.SetActive(false);
         uiCanvas.SetActive(true);
         isMenuOpen = false;
@@ -73,11 +74,11 @@ public class MenuManager : MonoBehaviour
             menu.SetActive(true);
             SaveGameMenu.SetActive(false);
             OptionMenu.SetActive(false);
-            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = true;
             menuCanvas.SetActive(false);
             uiCanvas.SetActive(true);
             isMenuOpen = false;
-            Cursor.visible = false;
             SelectionManager.Instance.EnableSelection();
             SelectionManager.Instance.GetComponent<SelectionManager>().enabled = true;
         }
@@ -86,11 +87,11 @@ public class MenuManager : MonoBehaviour
             menu.SetActive(true);
             SaveGameMenu.SetActive(false);
             OptionMenu.SetActive(false);
-            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = true;
             menuCanvas.SetActive(false);
             uiCanvas.SetActive(true);
             isMenuOpen = false;
-
             SelectionManager.Instance.EnableSelection();
             SelectionManager.Instance.GetComponent<SelectionManager>().enabled = true;
         }
