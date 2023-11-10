@@ -123,6 +123,9 @@ MonoBehaviour:
   healthEffect: 0
   staminaEffect: 0
   calorieseffect: 0
+  healthIncrease: 10
+  staminaIncrease: 10
   isEquippable: 1
   isInsideQuickSlot: 0
+  wasInQuickSlot: 0
   isSelected: 0

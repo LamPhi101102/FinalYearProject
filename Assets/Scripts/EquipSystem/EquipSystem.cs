@@ -12,6 +12,10 @@ public class EquipSystem : MonoBehaviour
     public GameObject quickSlotsPanel;
     public List<GameObject> quickSlotsList = new List<GameObject>();
 
+    // Bow Weapon
+    public GameObject bow;
+    public GameObject containBow;
+
 
     public GameObject numberHolder;
 
@@ -43,30 +47,6 @@ public class EquipSystem : MonoBehaviour
         {
             SelectQuickSlot(1);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            SelectQuickSlot(2);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            SelectQuickSlot(3);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            SelectQuickSlot(4);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            SelectQuickSlot(5);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha6))
-        {
-            SelectQuickSlot(6);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha7))
-        {
-            SelectQuickSlot(7);
-        }
     }
 
     void SelectQuickSlot(int number)
@@ -91,6 +71,12 @@ public class EquipSystem : MonoBehaviour
                 }
 
                 TextMeshProUGUI toBeChanged = numberHolder.transform.Find("QuickSlotNumberFrame"+number).transform.Find("Number").GetComponent<TextMeshProUGUI>();
+
+                if (selectedItem.CompareTag("BowWeapon"))
+                {
+                    bow.SetActive(true);
+                    containBow.SetActive(true);
+                }            
                 toBeChanged.color = Color.yellow;
             }
             // we are trying to select the same slot
@@ -104,6 +90,8 @@ public class EquipSystem : MonoBehaviour
                     selectedItem.gameObject.GetComponent<InventoryItem>().isSelected = false;
                     selectedItem = null;
                 }
+                    bow.SetActive(false);
+                    containBow.SetActive(false);
                 // Changing the color
                 foreach (Transform child in numberHolder.transform)
                 {

@@ -12,7 +12,7 @@ public class PlayerState : MonoBehaviour
     // Using public in order to easy to test
     public float currentHP;
     public float maxHP;
-
+    
     // ===========> Play Stamina <===========
     public float currentStamina;
     public float maxStamina;
@@ -94,6 +94,16 @@ public class PlayerState : MonoBehaviour
     public void setCalories(float newCalories)
     {
         currentCaloriesPercent = newCalories;
+    }
+    // Set for equip armor and weapon
+    public void setMaxHealth(float newmaxHP)
+    {
+        maxHP = newmaxHP;
+    }
+    // Set New Stamina
+    public void setMaxStamina(float newmaxStamina)
+    {
+        maxStamina = newmaxStamina;
     }
 
 }

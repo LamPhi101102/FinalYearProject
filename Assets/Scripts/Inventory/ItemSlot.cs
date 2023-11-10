@@ -20,26 +20,35 @@ public class ItemSlot : MonoBehaviour, IDropHandler
     }
     public void OnDrop(PointerEventData eventData)
     {
-        Debug.Log("OnDrop");
 
         if (!Item)
-        {         
+        {
+            InventoryItem draggedItem = DragDrop.itemBeingDragged.GetComponent<InventoryItem>();
+
             // Check if the item being dragged is equippable
-            if (DragDrop.itemBeingDragged.GetComponent<InventoryItem>().isEquippable == true)
+            if (draggedItem.isEquippable)
             {
                 DragDrop.itemBeingDragged.transform.SetParent(transform);
-                DragDrop.itemBeingDragged.transform.localPosition = new Vector2(0, 0);
+                DragDrop.itemBeingDragged.transform.localPosition = Vector2.zero;
 
-                if (transform.CompareTag("QuickSlot") == false)
-                {
-                    DragDrop.itemBeingDragged.GetComponent<InventoryItem>().isInsideQuickSlot = false;
-                    InventorySystem.instance.ReCalculateList();
-                }
                 if (transform.CompareTag("QuickSlot"))
                 {
-                    DragDrop.itemBeingDragged.GetComponent<InventoryItem>().isInsideQuickSlot = true;
-                    InventorySystem.instance.ReCalculateList();
+                    if (!draggedItem.isInsideQuickSlot)
+                    {
+                        draggedItem.isInsideQuickSlot = true;
+                        draggedItem.consumingIncrease(draggedItem.healthIncrease, draggedItem.staminaIncrease);
+                    }
                 }
+                else
+                {
+                    if (draggedItem.isInsideQuickSlot)
+                    {
+                        draggedItem.isInsideQuickSlot = false;
+                        draggedItem.consumingDecrease(draggedItem.healthIncrease, draggedItem.staminaIncrease);
+                    }
+                }
+
+                InventorySystem.instance.ReCalculateList();
             }
             else if(transform.CompareTag("Slot"))
             {

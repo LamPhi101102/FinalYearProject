@@ -19,15 +19,19 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public string thisName, thisDescription, thisFunctionality;
 
     private GameObject itemPendingConsumption;
-
+    // Recovery Variable
     public bool isConsumable;
     public float healthEffect;
     public float staminaEffect;
     public float calorieseffect;
+    // Increase Variable
+    public float healthIncrease;
+    public float staminaIncrease;
 
     public bool isEquippable;
     private GameObject itempendingEquipping;
     public bool isInsideQuickSlot;
+    public bool wasInQuickSlot = false;
 
     public bool isSelected;
 
@@ -84,9 +88,10 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             if (isEquippable == true && isInsideQuickSlot == false && EquipSystem.Instance.CheckIfFull() == false)
             {
                 EquipSystem.Instance.AddToQuickSlots(gameObject);
-                isInsideQuickSlot = true; 
+                isInsideQuickSlot = true;
+                consumingIncrease(healthIncrease, staminaIncrease);
             }
-        }
+       }
 
     }
     // Event when we right click on an item in inventory
@@ -111,6 +116,19 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         staminaEffectCalculation(staminaEffect);
         caloriesEffectCalculation(caloriesEffect);
     }
+    // ==============================> Equip Armor Increase and Decrease <====================================
+    public void consumingIncrease(float healthIncrease, float staminaIncrease)
+    {
+        itemInfoUI.SetActive(false);
+        healhEffectIncrease(healthIncrease);
+        StaminaEffectIncrease(staminaIncrease);
+    }
+    public void consumingDecrease(float healthIncrease, float staminaIncrease)
+    {
+        itemInfoUI.SetActive(false);
+        HealthEffectDecrease(healthIncrease);
+        StaminaEffectDecrease(staminaIncrease);
+    }
 
     private static void healhEffectCalculation(float healthEffect)
     {
@@ -130,6 +148,33 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             }
         }
     }
+    // Set for Amor Category when equip gears
+    private void healhEffectIncrease(float healthIncrease)
+    {    
+        float maxHealth = PlayerState.Instance.maxHP;
+        PlayerState.Instance.setMaxHealth(maxHealth + healthIncrease);
+    }
+    // Set for Amor Category when unequip gears
+    private void HealthEffectDecrease(float healthIncrease)
+    {
+        float maxHealth = PlayerState.Instance.maxHP;
+        PlayerState.Instance.setMaxHealth(maxHealth - healthIncrease);
+    }
+
+
+    // Set for Amor Category when equip gears
+    private void StaminaEffectIncrease(float staminaIncrease)
+    {
+        float maxStamina = PlayerState.Instance.maxStamina;
+        PlayerState.Instance.setMaxStamina(maxStamina + staminaIncrease);
+    }
+    // Set for Amor Category when unequip gears
+    private void StaminaEffectDecrease(float staminaIncrease)
+    {
+        float maxStamina = PlayerState.Instance.maxStamina;
+        PlayerState.Instance.setMaxStamina(maxStamina - staminaIncrease);
+    }
+ 
 
     private static void staminaEffectCalculation(float staminaEffect)
     {
