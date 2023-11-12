@@ -22,6 +22,7 @@ public class EquipSystem : MonoBehaviour
     // it is not select because it is not in range of quickslot
     public int selectedNumber = -1;
     public GameObject selectedItem;
+    public bool isBowEquip = false;
 
 
     private void Awake()
@@ -76,6 +77,11 @@ public class EquipSystem : MonoBehaviour
                 {
                     bow.SetActive(true);
                     containBow.SetActive(true);
+                    isBowEquip = true;
+                }
+                else
+                {
+                    isBowEquip = false;
                 }            
                 toBeChanged.color = Color.yellow;
             }
@@ -92,6 +98,7 @@ public class EquipSystem : MonoBehaviour
                 }
                     bow.SetActive(false);
                     containBow.SetActive(false);
+                isBowEquip = false;
                 // Changing the color
                 foreach (Transform child in numberHolder.transform)
                 {

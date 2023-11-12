@@ -273,7 +273,7 @@ namespace StarterAssets
 
         private void AimShoot()
         {
-            if (_input.isAiming && Grounded && !_input.sprint)
+            if (_input.isAiming && Grounded && !_input.sprint && EquipSystem.Instance.isBowEquip == true)
             {
                 // Play Aim Animation
                 _animator.SetBool("Aiming", _input.isAiming);
