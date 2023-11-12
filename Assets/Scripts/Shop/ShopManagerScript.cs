@@ -57,7 +57,32 @@ public class ShopManagerScript : MonoBehaviour
         shopItems[1, 23] = 23;
         shopItems[1, 24] = 24;
 
-        shopItemsResource[1, 8] = "Axe";
+        // item Resource after buying
+        shopItemsResource[1, 1] = "Bow";
+        shopItemsResource[1, 2] = "Axe";
+        shopItemsResource[1, 3] = "Sword";
+        shopItemsResource[1, 4] = "Stone Armor";
+        shopItemsResource[1, 5] = "Gold Ring";
+        shopItemsResource[1, 6] = "Wooden Gloves";
+        shopItemsResource[1, 7] = "Boots";
+        shopItemsResource[1, 8] = "Stone Shoulder";
+        shopItemsResource[1, 9] = "Stone Helmet";
+        shopItemsResource[1, 10] = "Wooden Bracers";
+        shopItemsResource[1, 11] = "Wooden Belt";
+        shopItemsResource[1, 12] = "Water";
+        shopItemsResource[1, 13] = "Apple";
+        shopItemsResource[1, 14] = "Bread";
+        shopItemsResource[1, 15] = "Big Bread";
+        shopItemsResource[1, 16] = "Piece Of Cheese";
+        shopItemsResource[1, 17] = "Cheese";
+        shopItemsResource[1, 18] = "Orange";
+        shopItemsResource[1, 19] = "Pumpkin";
+        shopItemsResource[1, 20] = "Tomato";
+        shopItemsResource[1, 21] = "Watermelon";
+        shopItemsResource[1, 22] = "Meat";
+        shopItemsResource[1, 23] = "Schnitzel";
+        shopItemsResource[1, 24] = "Sausage";
+
 
         // Price
         shopItems[2, 1] = 10;
@@ -71,19 +96,19 @@ public class ShopManagerScript : MonoBehaviour
         shopItems[2, 9] = 90;
         shopItems[2, 10] = 100;
         shopItems[2, 11] = 110;
-        shopItems[2, 12] = 120;
-        shopItems[2, 13] = 130;
-        shopItems[2, 14] = 140;
-        shopItems[2, 15] = 150;
-        shopItems[2, 16] = 160;
-        shopItems[2, 17] = 170;
-        shopItems[2, 18] = 180;
-        shopItems[2, 19] = 190;
-        shopItems[2, 20] = 200;
-        shopItems[2, 21] = 210;
-        shopItems[2, 22] = 220;
-        shopItems[2, 23] = 230;
-        shopItems[2, 24] = 240;
+        shopItems[2, 12] = 12;
+        shopItems[2, 13] = 13;
+        shopItems[2, 14] = 14;
+        shopItems[2, 15] = 15;
+        shopItems[2, 16] = 16;
+        shopItems[2, 17] = 17;
+        shopItems[2, 18] = 18;
+        shopItems[2, 19] = 19;
+        shopItems[2, 20] = 20;
+        shopItems[2, 21] = 21;
+        shopItems[2, 22] = 22;
+        shopItems[2, 23] = 23;
+        shopItems[2, 24] = 24;
 
     }
 
@@ -110,7 +135,7 @@ public class ShopManagerScript : MonoBehaviour
         {
             silvers -= shopItems[2, ButtonRef.GetComponent<ButtonInfo>().ItemID];
             coinsSilversTxt.text = "Coins: " + silvers.ToString();
-            BuyItemShop(shopItemsResource[1, 8]);
+            BuyItemShop(shopItemsResource[1, ButtonRef.GetComponent<ButtonInfo>().ItemID]);
         }
     }
     public void AddCoins(int amount)
