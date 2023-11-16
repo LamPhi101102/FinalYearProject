@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
+using System.Diagnostics;
 
 public class EquipSystem : MonoBehaviour
 {
@@ -15,7 +16,8 @@ public class EquipSystem : MonoBehaviour
     // Bow Weapon
     public GameObject bow;
     public GameObject containBow;
-
+    // Sword Weapon
+    public GameObject sword;
 
     public GameObject numberHolder;
 
@@ -23,6 +25,8 @@ public class EquipSystem : MonoBehaviour
     public int selectedNumber = -1;
     public GameObject selectedItem;
     public bool isBowEquip = false;
+    public bool isSwordEquip = false;
+    public bool isAxeEquip = false;
 
 
     private void Awake()
@@ -63,27 +67,39 @@ public class EquipSystem : MonoBehaviour
                     selectedItem.gameObject.GetComponent<InventoryItem>().isSelected = false;
                 }
                 selectedItem = getSelectedItem(number);
-                selectedItem.GetComponent<InventoryItem>().isSelected = true;
-
-                // Changing the color
-                foreach (Transform child in numberHolder.transform)
+                if(selectedItem != null)
                 {
-                    child.transform.Find("Number").GetComponent<TextMeshProUGUI>().color = Color.white;
-                }
+                    selectedItem.GetComponent<InventoryItem>().isSelected = true;
+                    // Changing the color
+                    foreach (Transform child in numberHolder.transform)
+                    {
+                        child.transform.Find("Number").GetComponent<TextMeshProUGUI>().color = Color.white;
+                    }
 
-                TextMeshProUGUI toBeChanged = numberHolder.transform.Find("QuickSlotNumberFrame"+number).transform.Find("Number").GetComponent<TextMeshProUGUI>();
+                    TextMeshProUGUI toBeChanged = numberHolder.transform.Find("QuickSlotNumberFrame" + number).transform.Find("Number").GetComponent<TextMeshProUGUI>();
 
-                if (selectedItem.CompareTag("BowWeapon"))
-                {
-                    bow.SetActive(true);
-                    containBow.SetActive(true);
-                    isBowEquip = true;
-                }
-                else
-                {
-                    isBowEquip = false;
+                    if (selectedItem.CompareTag("BowWeapon"))
+                    {
+                        bow.SetActive(true);
+                        containBow.SetActive(true);
+                        isBowEquip = true;
+                    }
+                    else
+                    {
+                        isBowEquip = false;
+                    }
+                    if (selectedItem.CompareTag("Sword"))
+                    {
+                        sword.SetActive(true);
+                        isSwordEquip = true;
+                    }
+                    else
+                    {
+                        isSwordEquip = false;
+                    }
+                    toBeChanged.color = Color.yellow;
                 }            
-                toBeChanged.color = Color.yellow;
+   
             }
             // we are trying to select the same slot
             else
@@ -96,8 +112,10 @@ public class EquipSystem : MonoBehaviour
                     selectedItem.gameObject.GetComponent<InventoryItem>().isSelected = false;
                     selectedItem = null;
                 }
-                    bow.SetActive(false);
-                    containBow.SetActive(false);
+                bow.SetActive(false);
+                containBow.SetActive(false);
+                isSwordEquip = false;
+
                 isBowEquip = false;
                 // Changing the color
                 foreach (Transform child in numberHolder.transform)
@@ -111,7 +129,22 @@ public class EquipSystem : MonoBehaviour
 
     GameObject getSelectedItem(int slotNumber)
     {
-        return quickSlotsList[slotNumber - 1].transform.GetChild(1).gameObject;
+        if (slotNumber > 0 && slotNumber <= quickSlotsList.Count)
+        {
+            Transform slotTransform = quickSlotsList[slotNumber - 1].transform;
+            if (slotTransform.childCount > 1)
+            {
+                return slotTransform.GetChild(1).gameObject;
+            }
+            else
+            {
+                return null; // Return null or handle the absence of an item in the slot
+            }
+        }
+        else
+        {
+            return null; // Return null or handle the out-of-range slot number
+        }
     }
 
 

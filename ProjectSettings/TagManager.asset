@@ -15,6 +15,7 @@ TagManager:
   - ExquisiteChest
   - PreciousChest
   - BowWeapon
+  - Sword
   layers:
   - Default
   - TransparentFX

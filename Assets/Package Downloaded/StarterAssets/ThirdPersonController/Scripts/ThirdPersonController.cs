@@ -195,6 +195,7 @@ namespace StarterAssets
             GroundedCheck();
             Move();
             AimShoot();
+            SwordAttack();
             // Check if the inventory is open
 
             // Check for inventory open/close key (e.g., "B" key for open and "Escape" for close).
@@ -288,6 +289,26 @@ namespace StarterAssets
                 _animator.SetBool("Shooting", false);
                 playerFollowCamera.SetActive(true);
                 playerAimCamera.SetActive(false);
+            }
+        }
+
+        private void SwordAttack()
+        {
+            if(_input.isSwordLeftAttack && Grounded && _input.move == Vector2.zero && !_input.sprint && EquipSystem.Instance.isSwordEquip == true)
+            {
+                _animator.SetBool("LeftAttack", _input.isSwordLeftAttack);
+            }
+            else
+            {
+                _animator.SetBool("LeftAttack", false);
+            }
+            if (_input.isSwordRightAttack && Grounded && _input.move == Vector2.zero && !_input.sprint && EquipSystem.Instance.isSwordEquip == true)
+            {
+                _animator.SetBool("RightAttack", _input.isSwordRightAttack);
+            }
+            else
+            {
+                _animator.SetBool("RightAttack", false);
             }
         }
 

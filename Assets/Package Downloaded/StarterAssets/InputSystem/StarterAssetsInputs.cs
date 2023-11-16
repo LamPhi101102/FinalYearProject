@@ -14,7 +14,8 @@ namespace StarterAssets
 		public bool sprint;
 		public bool isAiming;
 		public bool isShooting;
-
+		public bool isSwordLeftAttack;
+		public bool isSwordRightAttack;
 		[Header("Movement Settings")]
 		public bool analogMovement;
 
@@ -52,6 +53,14 @@ namespace StarterAssets
 		public void OnShoot(InputValue value)
 		{
 			isShooting = value.isPressed;
+		}
+		public void OnSwordLeftAttack(InputValue value)
+		{
+			isSwordLeftAttack = value.isPressed;
+		}
+		public void OnSwordRightAttack(InputValue value)
+		{
+			isSwordRightAttack = value.isPressed;
 		}
 #endif
 
