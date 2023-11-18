@@ -114,6 +114,7 @@ namespace StarterAssets
         public GameObject InventoryScreen;
         private bool isInventoryOpen = false;
         private bool isCameraLocked;
+        public GameObject sword;
         private bool isCraftingOpen;
         private bool isShopOpen;
         public bool isMenuOpen;
@@ -187,6 +188,15 @@ namespace StarterAssets
             isCameraLocked = false;
             isMenuOpen = false;
         }
+
+        public void StartDealDamage()
+        {
+            sword.GetComponentInChildren<DamageDealer>().StartDealDamage();
+        }
+        public void EndDealDamage()
+        {
+            sword.GetComponentInChildren<DamageDealer>().EndDealDamage();
+        }   
 
         private void Update()
         {

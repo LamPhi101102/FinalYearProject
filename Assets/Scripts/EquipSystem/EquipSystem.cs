@@ -114,8 +114,8 @@ public class EquipSystem : MonoBehaviour
                 }
                 bow.SetActive(false);
                 containBow.SetActive(false);
+                sword.SetActive(false);
                 isSwordEquip = false;
-
                 isBowEquip = false;
                 // Changing the color
                 foreach (Transform child in numberHolder.transform)
@@ -213,5 +213,4 @@ public class EquipSystem : MonoBehaviour
             return false;
         }
     }
-    
 }
