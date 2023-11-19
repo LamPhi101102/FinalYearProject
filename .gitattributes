@@ -1,0 +1,2 @@
+File filter=lfs diff=lfs merge=lfs -text
+Assets/Package[[:space:]]Downloaded/StarterAssets/ThirdPersonController/Character/Animations/Ch05_nonPBR.fbx filter=lfs diff=lfs merge=lfs -text
