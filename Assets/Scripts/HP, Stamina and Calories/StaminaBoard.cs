@@ -26,6 +26,10 @@ public class StaminaBoard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (playerState == null)
+        {
+            return;
+        }
         // Get the value from PlayerState Script
         currentStamina = playerState.GetComponent<PlayerState>().currentStamina;
         maxStamina = playerState.GetComponent<PlayerState>().maxStamina;

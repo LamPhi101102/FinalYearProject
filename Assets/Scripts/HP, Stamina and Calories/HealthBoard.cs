@@ -22,6 +22,10 @@ public class HealthBoard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (playerState == null)
+        {
+            return;
+        }
         // Get the value from PlayerState Script
         currentHP = playerState.GetComponent<PlayerState>().currentHP;
         maxHP = playerState.GetComponent<PlayerState>().maxHP;

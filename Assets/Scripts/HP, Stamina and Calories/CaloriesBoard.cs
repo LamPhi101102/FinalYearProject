@@ -21,6 +21,10 @@ public class CaloriesBoard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (playerState == null)
+        {
+            return;
+        }
         // Get the value from PlayerState Script
         currentCaloriesPercent = playerState.GetComponent<PlayerState>().currentCaloriesPercent;
         maxCaloriesPercent = playerState.GetComponent<PlayerState>().maxCaloriesPercent;
