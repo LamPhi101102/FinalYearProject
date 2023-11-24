@@ -84,7 +84,7 @@ public class Enemy : MonoBehaviour
             Die();
         }
     }
-    /*public void StartDealDamage()
+    public void StartDealDamage()
     {
         GetComponentInChildren<EnemyDamageDealer>().StartDealDamage();
     }
@@ -93,7 +93,7 @@ public class Enemy : MonoBehaviour
         GetComponentInChildren<EnemyDamageDealer>().EndDealDamage();
     }
 
-    public void HitVFX(Vector3 hitPosition)
+    /*public void HitVFX(Vector3 hitPosition)
     {
         GameObject hit = Instantiate(hitVFX, hitPosition, Quaternion.identity);
         Destroy(hit, 3f);

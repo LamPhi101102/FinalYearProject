@@ -27,7 +27,10 @@ public class PlayerState : MonoBehaviour
 
     public bool isColoriesActions;
 
-     
+    // ======= Animation ===============
+    Animator animator;
+
+
     public void Awake()
     {
         if(Instance != null && Instance != this)
@@ -43,6 +46,7 @@ public class PlayerState : MonoBehaviour
     private void Start()
     {
         // Player will have a max HP board when starting
+        animator = GetComponent<Animator>();
         currentHP = maxHP;
         currentStamina = maxStamina;
         currentCaloriesPercent = maxCaloriesPercent;
@@ -56,6 +60,22 @@ public class PlayerState : MonoBehaviour
             currentCaloriesPercent -= 1;
             yield return new WaitForSeconds(10);
         }
+    }
+
+    public void TakeDamage(float damageAmount)
+    {
+        currentHP -= damageAmount;
+        animator.SetTrigger("damage");
+
+        if(currentHP <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        Destroy(this.gameObject);
     }
 
         // Update is called once per frame
@@ -79,6 +99,8 @@ public class PlayerState : MonoBehaviour
             currentHP -= 10;
         }
     }
+
+
 
     // set new HP
     public void setHealth(float newHP)
