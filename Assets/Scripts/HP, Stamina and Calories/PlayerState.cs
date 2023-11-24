@@ -29,6 +29,7 @@ public class PlayerState : MonoBehaviour
 
     // ======= Animation ===============
     Animator animator;
+    [SerializeField] GameObject ragdoll;
 
 
     public void Awake()
@@ -68,13 +69,14 @@ public class PlayerState : MonoBehaviour
         animator.SetTrigger("damage");
 
         if(currentHP <= 0)
-        {
+        {         
             Die();
         }
     }
 
     void Die()
     {
+        Instantiate(ragdoll, transform.position, transform.rotation);
         Destroy(this.gameObject);
     }
 
