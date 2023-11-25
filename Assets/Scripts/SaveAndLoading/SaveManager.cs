@@ -24,7 +24,21 @@ public class SaveManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    // Json Project Save Path
+    string jsonPathProject;
+    // Json External/Real Save Path
+    string jsonPathPersistant;
+    // Binary Save Path
+    string binaryPath;
+
     public bool isSavingToJson;
+
+    private void Start()
+    {      
+        jsonPathProject = Application.dataPath + Path.AltDirectorySeparatorChar + "SaveGame.json";
+        jsonPathPersistant = Application.persistentDataPath + Path.AltDirectorySeparatorChar + "SaveGame.json";
+        binaryPath = Application.persistentDataPath + "/save_game.bin";
+    }
 
     #region || ------- To General Section=====||
 
@@ -60,9 +74,9 @@ public class SaveManager : MonoBehaviour
 
     public void SavingTypeSwitch(AllGameData gameData)
     {
-        if (isSavingToJson)
+        if (isSavingToJson == true)
         {
-            // SaveGameDataToJsonFile(gameData);
+            SaveGameDataToJsonFile(gameData);
         }
         else
         {
@@ -77,7 +91,7 @@ public class SaveManager : MonoBehaviour
     {
         if (isSavingToJson)
         {
-            AllGameData gameData = LoadGameDataFromBinaryFile();
+            AllGameData gameData = LoadGameDataFromJsonFile();
             return gameData;
         }
         else
@@ -131,7 +145,38 @@ public class SaveManager : MonoBehaviour
     private IEnumerator DelayedLoading()
     {
         yield return new WaitForSeconds(1f);
-        LoadGame();     
+        LoadGame();       
+    }
+
+    #endregion
+    #endregion
+
+    #region || ------- To Json Section=====||
+
+    public void SaveGameDataToJsonFile(AllGameData gameData)
+    {
+        string json = JsonUtility.ToJson(gameData);
+
+        string encrypted = EncryptionDecryption(json);
+
+        using (StreamWriter writer = new StreamWriter(jsonPathProject))
+        {
+            writer.Write(encrypted);
+            Debug.Log("Saved Game to Json file at" + jsonPathProject);
+        };
+    }
+
+    public AllGameData LoadGameDataFromJsonFile()
+    {
+        using (StreamReader reader = new StreamReader(jsonPathProject))
+        {
+            string json = reader.ReadToEnd();
+
+            string decrypted = EncryptionDecryption(json);
+
+            AllGameData data = JsonUtility.FromJson<AllGameData>(decrypted);
+            return data;
+        };
     }
 
     #endregion
@@ -142,29 +187,27 @@ public class SaveManager : MonoBehaviour
     {
         BinaryFormatter formatter = new BinaryFormatter();
 
-        string path = Application.persistentDataPath + "/save_game.bin";
-        FileStream stream = new FileStream(path, FileMode.Create);
+        FileStream stream = new FileStream(binaryPath, FileMode.Create);
 
         formatter.Serialize(stream, gameData);
         stream.Close();
-        Debug.Log("Data saved to" + Application.persistentDataPath + "/save_game.bin");
+        Debug.Log("Data saved to" + binaryPath);
 
 
     }
 
     public AllGameData LoadGameDataFromBinaryFile()
     {
-        string path = Application.persistentDataPath + "/save_game.bin";
-        
-        if (File.Exists(path))
+       
+        if (File.Exists(binaryPath))
         {
             BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(path, FileMode.Open);
+            FileStream stream = new FileStream(binaryPath, FileMode.Open);
 
             AllGameData data = formatter.Deserialize(stream) as AllGameData;
             stream.Close();
 
-            Debug.Log("Game Loaded from" + Application.persistentDataPath + "/save_game.bin");
+            Debug.Log("Game Loaded from" + binaryPath);
 
             return data;
         }
@@ -210,5 +253,38 @@ public class SaveManager : MonoBehaviour
     }
     #endregion
 
+
+    #region || ======= Encrryption ====== ||
+
+    public string EncryptionDecryption(string jsonString)
+    {
+        string keyword = "1234567";
+
+        string result = "";
+
+        for(int i = 0; i < jsonString.Length; i++)
+        {
+            result += (char)(jsonString[i] ^ keyword[i % keyword.Length]);
+        }
+        return result; // Encrypted or Decrypted String
+
+        // XOR = "is there a difference"
+
+        // ---- Encrypt----
+        // Mike - 01101101 01101001 01101011 01100101
+        // M -          01101101
+        // Key -        00000001
+        //
+        // Encrypted  - 01101100
+
+        // ---- Decrypt----
+        // Encrypted  - 01101100
+        // Key -        00000001
+        //
+        // M -          01101101
+
+
+
+    }
     #endregion
 }
