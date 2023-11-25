@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine.SceneManagement;
 
 public class SaveManager : MonoBehaviour
 { 
@@ -27,13 +28,14 @@ public class SaveManager : MonoBehaviour
 
     #region || ------- To General Section=====||
 
+    #region || ------- Saving =====||
 
     public void SaveGame()
     {
         AllGameData data = new AllGameData();
         data.playerData = GetPlayerData();
 
-        SaveAllGameData(data);
+        SavingTypeSwitch(data);
     }
 
     private PlayerData GetPlayerData()
@@ -56,7 +58,7 @@ public class SaveManager : MonoBehaviour
     }
 
 
-    public void SaveAllGameData(AllGameData gameData)
+    public void SavingTypeSwitch(AllGameData gameData)
     {
         if (isSavingToJson)
         {
@@ -67,6 +69,71 @@ public class SaveManager : MonoBehaviour
             SaveGameDataToBinaryFile(gameData);
         }
     }
+    #endregion
+
+    #region || ------- Loading =====||
+
+    public AllGameData LoadingTypeSwitch()
+    {
+        if (isSavingToJson)
+        {
+            AllGameData gameData = LoadGameDataFromBinaryFile();
+            return gameData;
+        }
+        else
+        {
+            AllGameData gameData = LoadGameDataFromBinaryFile();
+            return gameData;
+        }
+    }
+
+    public void LoadGame()
+    {
+        //Player Data
+        SetPlayerData(LoadingTypeSwitch().playerData);
+        
+        // Environment Data
+
+    }
+
+    private void SetPlayerData(PlayerData playerData)
+    {
+        // Setting Player Stats
+        PlayerState.Instance.currentHP = playerData.playerStats[0];
+        PlayerState.Instance.currentStamina = playerData.playerStats[1];
+        PlayerState.Instance.currentCaloriesPercent = playerData.playerStats[2];
+
+        // Settings Player Position
+        Vector3 loadedPosition;
+        loadedPosition.x = playerData.playerPositionandRotation[0];
+        loadedPosition.y = playerData.playerPositionandRotation[1];
+        loadedPosition.z = playerData.playerPositionandRotation[2];
+
+        PlayerState.Instance.playerBody.transform.position = loadedPosition;
+
+        // Setting Player rotation
+        Vector3 loadedRotation;
+        loadedRotation.x = playerData.playerPositionandRotation[3];
+        loadedRotation.y = playerData.playerPositionandRotation[4];
+        loadedRotation.z = playerData.playerPositionandRotation[5];
+
+        PlayerState.Instance.playerBody.transform.rotation = Quaternion.Euler(loadedRotation);
+
+    }
+    
+    public void StartLoadedGame()
+    {
+        SceneManager.LoadScene("GameScene");
+
+        StartCoroutine(DelayedLoading());
+    }
+
+    private IEnumerator DelayedLoading()
+    {
+        yield return new WaitForSeconds(1f);
+        LoadGame();     
+    }
+
     #endregion
 
     #region || ------- To Binary Section=====||
@@ -96,6 +163,8 @@ public class SaveManager : MonoBehaviour
 
             AllGameData data = formatter.Deserialize(stream) as AllGameData;
             stream.Close();
+
+            Debug.Log("Game Loaded from" + Application.persistentDataPath + "/save_game.bin");
 
             return data;
         }
@@ -139,5 +208,7 @@ public class SaveManager : MonoBehaviour
         var volumeSettings = JsonUtility.FromJson<VolumeSettings>(PlayerPrefs.GetString("Volume"));
         return volumeSettings.music;
     }
+    #endregion
+
     #endregion
 }
