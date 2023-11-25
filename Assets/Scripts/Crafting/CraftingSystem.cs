@@ -219,6 +219,8 @@ public class CraftingSystem : MonoBehaviour
 
     void CraftAnyItems(BluePrint blueprintToCraft)
     {
+        SoundManager.instance.PlayDropSound(SoundManager.instance.craftingItemSound);
+        StartCoroutine(craftedDelayforSound());
         // add item into inventory
         InventorySystem.instance.AddToInventory(blueprintToCraft.itemName);
 
@@ -233,6 +235,10 @@ public class CraftingSystem : MonoBehaviour
         }
         //refrsh list
         StartCoroutine(calculate());
+    }
+    IEnumerator craftedDelayforSound()
+    {
+        yield return new WaitForSeconds(1f);
     }
 
     public IEnumerator calculate()

@@ -23,6 +23,8 @@ public class ItemSlot : MonoBehaviour, IDropHandler
 
         if (!Item)
         {
+            SoundManager.instance.PlayDropSound(SoundManager.instance.dropItemSound);
+
             InventoryItem draggedItem = DragDrop.itemBeingDragged.GetComponent<InventoryItem>();
 
             // Check if the item being dragged is equippable
@@ -54,7 +56,6 @@ public class ItemSlot : MonoBehaviour, IDropHandler
             {
                 DragDrop.itemBeingDragged.transform.SetParent(transform);
                 DragDrop.itemBeingDragged.transform.localPosition = new Vector2(0, 0);
-                Debug.Log("Cannot drop non-equippable item into this slot.");
             }
         }
     }
