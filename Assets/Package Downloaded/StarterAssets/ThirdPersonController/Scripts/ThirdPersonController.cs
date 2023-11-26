@@ -119,6 +119,7 @@ namespace StarterAssets
         private bool isCraftingOpen;
         private bool isShopOpen;
         public bool isMenuOpen;
+        public bool isOpenDialog;
         public bool isMenuContinue;
         Button ContinueButton;
         public GameObject menu;
@@ -163,6 +164,7 @@ namespace StarterAssets
             isMenuOpen = false;
             isMenuContinue = false;
             isMoveLocked = false;
+            isOpenDialog = false;
 
             ContinueButton = menu.transform.Find("ContinueButton").GetComponent<Button>();
             ContinueButton.onClick.AddListener(delegate { CloseMenu(); });
@@ -282,15 +284,17 @@ namespace StarterAssets
                 isMenuOpen = false;
             }
 
-            if (DialogSystem.instance.dialogUIActive)
-            {
+            if (DialogSystem.instance.dialogUIActive && isOpenDialog)
+            { 
                 isCameraLocked = true;
                 isMoveLocked = true;
+                isOpenDialog = false;
             }
-            else if (DialogSystem.instance.dialogUIActive == false)
+            else if (DialogSystem.instance.dialogUIActive == false && !isOpenDialog)
             {
                 isCameraLocked = false;
                 isMoveLocked = false;
+                isOpenDialog = true;
             }
         }
         
