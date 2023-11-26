@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 
 public class SelectionManager : MonoBehaviour
 {
@@ -64,6 +65,27 @@ public class SelectionManager : MonoBehaviour
             var selectionTransform = hit.transform;
             // it means call a fruntion from another script and then Getcomponent from this script
             InteractableObject interactable = selectionTransform.GetComponent<InteractableObject>();
+
+            NPC npc = selectionTransform.GetComponent<NPC>();
+
+            if (npc && npc.playerInRange)
+            {
+                string itemName = npc.GetItemName();
+
+                interaction_text.text = itemName;
+                Interaction_info_UI.SetActive(true);
+
+                if(Input.GetMouseButtonDown(0) && npc.isTalkingWithPlayer == false)
+                {
+                    npc.StartConservation();
+                }
+            }
+            else
+            {
+                interaction_text.text = "";
+                Interaction_info_UI.SetActive(false);
+            }
+
             // Check if when there is a component
             if (interactable && interactable.playerInRange)
             {
@@ -92,7 +114,7 @@ public class SelectionManager : MonoBehaviour
                 // ***** Definitely Delete *****
                 onTarget = false;
                 // turn off the Text component (there is a hit without an Interactable script)
-                Interaction_info_UI.SetActive(false);
+                //Interaction_info_UI.SetActive(false);
                 centerhandIcon.gameObject.SetActive(false);
                 centerDotIcon.gameObject.SetActive(true);
             }

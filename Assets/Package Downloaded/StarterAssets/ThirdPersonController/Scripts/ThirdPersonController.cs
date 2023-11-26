@@ -114,6 +114,7 @@ namespace StarterAssets
         public GameObject InventoryScreen;
         private bool isInventoryOpen = false;
         private bool isCameraLocked;
+        private bool isMoveLocked;
         public GameObject sword;
         private bool isCraftingOpen;
         private bool isShopOpen;
@@ -161,6 +162,7 @@ namespace StarterAssets
             isShopOpen = false;
             isMenuOpen = false;
             isMenuContinue = false;
+            isMoveLocked = false;
 
             ContinueButton = menu.transform.Find("ContinueButton").GetComponent<Button>();
             ContinueButton.onClick.AddListener(delegate { CloseMenu(); });
@@ -278,6 +280,17 @@ namespace StarterAssets
             {
                 isCameraLocked = false;
                 isMenuOpen = false;
+            }
+
+            if (DialogSystem.instance.dialogUIActive)
+            {
+                isCameraLocked = true;
+                isMoveLocked = true;
+            }
+            else if (DialogSystem.instance.dialogUIActive == false)
+            {
+                isCameraLocked = false;
+                isMoveLocked = false;
             }
         }
         
@@ -410,6 +423,10 @@ namespace StarterAssets
 
         private void Move()
         {
+            if (isMoveLocked)
+            {
+                return;
+            }
             // set target speed based on move speed, sprint speed and if sprint is pressed
             float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
 
