@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-using UnityEngine;
 using Debug = UnityEngine.Debug;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
+
 
 public class SaveManager : MonoBehaviour
 { 
@@ -31,25 +32,30 @@ public class SaveManager : MonoBehaviour
     // Binary Save Path
     string binaryPath;
 
+
+    string fileName = "SaveGame";
+
+
+
     public bool isSavingToJson;
 
     private void Start()
     {      
-        jsonPathProject = Application.dataPath + Path.AltDirectorySeparatorChar + "SaveGame.json";
-        jsonPathPersistant = Application.persistentDataPath + Path.AltDirectorySeparatorChar + "SaveGame.json";
-        binaryPath = Application.persistentDataPath + "/save_game.bin";
+        jsonPathProject = Application.dataPath + Path.AltDirectorySeparatorChar;
+        jsonPathPersistant = Application.persistentDataPath + Path.AltDirectorySeparatorChar;
+        binaryPath = Application.persistentDataPath + Path.AltDirectorySeparatorChar;
     }
 
     #region || ------- To General Section=====||
 
     #region || ------- Saving =====||
 
-    public void SaveGame()
+    public void SaveGame(int slotNumber)
     {
         AllGameData data = new AllGameData();
         data.playerData = GetPlayerData();
 
-        SavingTypeSwitch(data);
+        SavingTypeSwitch(data, slotNumber);
     }
 
     private PlayerData GetPlayerData()
@@ -72,39 +78,39 @@ public class SaveManager : MonoBehaviour
     }
 
 
-    public void SavingTypeSwitch(AllGameData gameData)
+    public void SavingTypeSwitch(AllGameData gameData, int slotNumber)
     {
         if (isSavingToJson == true)
         {
-            SaveGameDataToJsonFile(gameData);
+            SaveGameDataToJsonFile(gameData, slotNumber);
         }
         else
         {
-            SaveGameDataToBinaryFile(gameData);
+            SaveGameDataToBinaryFile(gameData, slotNumber);
         }
     }
     #endregion
 
     #region || ------- Loading =====||
 
-    public AllGameData LoadingTypeSwitch()
+    public AllGameData LoadingTypeSwitch(int slotNumber)
     {
         if (isSavingToJson)
         {
-            AllGameData gameData = LoadGameDataFromJsonFile();
+            AllGameData gameData = LoadGameDataFromJsonFile(slotNumber);
             return gameData;
         }
         else
         {
-            AllGameData gameData = LoadGameDataFromBinaryFile();
+            AllGameData gameData = LoadGameDataFromBinaryFile(slotNumber);
             return gameData;
         }
     }
 
-    public void LoadGame()
+    public void LoadGame(int slotNumber)
     {
         //Player Data
-        SetPlayerData(LoadingTypeSwitch().playerData);
+        SetPlayerData(LoadingTypeSwitch(slotNumber).playerData);
         
         // Environment Data
 
@@ -135,17 +141,17 @@ public class SaveManager : MonoBehaviour
 
     }
     
-    public void StartLoadedGame()
+    public void StartLoadedGame(int slotNumber)
     {
         SceneManager.LoadScene("GameScene");
 
-        StartCoroutine(DelayedLoading());
+        StartCoroutine(DelayedLoading(slotNumber));
     }
 
-    private IEnumerator DelayedLoading()
+    private IEnumerator DelayedLoading(int slotNumber)
     {
         yield return new WaitForSeconds(1f);
-        LoadGame();       
+        LoadGame(slotNumber);       
     }
 
     #endregion
@@ -153,22 +159,22 @@ public class SaveManager : MonoBehaviour
 
     #region || ------- To Json Section=====||
 
-    public void SaveGameDataToJsonFile(AllGameData gameData)
+    public void SaveGameDataToJsonFile(AllGameData gameData, int slotNumber)
     {
         string json = JsonUtility.ToJson(gameData);
 
         string encrypted = EncryptionDecryption(json);
 
-        using (StreamWriter writer = new StreamWriter(jsonPathProject))
+        using (StreamWriter writer = new StreamWriter(jsonPathProject + fileName + slotNumber + ".json"))
         {
             writer.Write(encrypted);
-            Debug.Log("Saved Game to Json file at" + jsonPathProject);
+            Debug.Log("Saved Game to Json file at" + jsonPathProject + fileName + slotNumber + ".json");
         };
     }
 
-    public AllGameData LoadGameDataFromJsonFile()
+    public AllGameData LoadGameDataFromJsonFile(int slotNumber)
     {
-        using (StreamReader reader = new StreamReader(jsonPathProject))
+        using (StreamReader reader = new StreamReader(jsonPathProject + fileName + slotNumber + ".json"))
         {
             string json = reader.ReadToEnd();
 
@@ -183,31 +189,31 @@ public class SaveManager : MonoBehaviour
 
     #region || ------- To Binary Section=====||
 
-    public void SaveGameDataToBinaryFile(AllGameData gameData)
+    public void SaveGameDataToBinaryFile(AllGameData gameData, int slotNumber)
     {
         BinaryFormatter formatter = new BinaryFormatter();
 
-        FileStream stream = new FileStream(binaryPath, FileMode.Create);
+        FileStream stream = new FileStream(binaryPath + fileName + slotNumber + ".bin", FileMode.Create);
 
         formatter.Serialize(stream, gameData);
         stream.Close();
-        Debug.Log("Data saved to" + binaryPath);
+        Debug.Log("Data saved to" + binaryPath + fileName + slotNumber + ".bin");
 
 
     }
 
-    public AllGameData LoadGameDataFromBinaryFile()
+    public AllGameData LoadGameDataFromBinaryFile(int slotNumber)
     {
        
-        if (File.Exists(binaryPath))
+        if (File.Exists(binaryPath + fileName + slotNumber + ".bin"))
         {
             BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(binaryPath, FileMode.Open);
+            FileStream stream = new FileStream(binaryPath + fileName + slotNumber + ".bin", FileMode.Open);
 
             AllGameData data = formatter.Deserialize(stream) as AllGameData;
             stream.Close();
 
-            Debug.Log("Game Loaded from" + binaryPath);
+            Debug.Log("Game Loaded from" + binaryPath + fileName + slotNumber + ".bin");
 
             return data;
         }
@@ -253,7 +259,6 @@ public class SaveManager : MonoBehaviour
     }
     #endregion
 
-
     #region || ======= Encrryption ====== ||
 
     public string EncryptionDecryption(string jsonString)
@@ -286,5 +291,54 @@ public class SaveManager : MonoBehaviour
 
 
     }
+    #endregion
+
+    #region || ======= Utility ====== ||
+
+    public bool DoesFileExists(int slotNumber)
+    {
+        if (isSavingToJson)
+        {
+            if (System.IO.File.Exists(jsonPathProject + fileName + slotNumber + ".json"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            if (System.IO.File.Exists(binaryPath + fileName + slotNumber + ".bin"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
+    public bool isSlotEmpty(int slotNumber)
+    {
+        if (DoesFileExists(slotNumber))
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    public void DeselectButton()
+    {
+        GameObject myEventSystem = GameObject.Find("UI_EventSystem");
+        myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(null);
+    }
+
+
+
     #endregion
 }
