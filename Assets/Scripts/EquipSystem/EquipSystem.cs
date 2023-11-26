@@ -181,7 +181,7 @@ public class EquipSystem : MonoBehaviour
         InventorySystem.instance.ReCalculateList();
     }
 
-    private GameObject FindNextEmptySlot()
+    public GameObject FindNextEmptySlot()
     {
         foreach (GameObject slot in quickSlotsList)
         {

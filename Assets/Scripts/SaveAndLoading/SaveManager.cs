@@ -35,7 +35,7 @@ public class SaveManager : MonoBehaviour
 
     string fileName = "SaveGame";
 
-
+    public bool isLoading;
 
     public bool isSavingToJson;
 
@@ -73,10 +73,31 @@ public class SaveManager : MonoBehaviour
         playerPosAndRot[3] = PlayerState.Instance.playerBody.transform.rotation.x;
         playerPosAndRot[4] = PlayerState.Instance.playerBody.transform.rotation.y;
         playerPosAndRot[5] = PlayerState.Instance.playerBody.transform.rotation.z;
-    
-        return new PlayerData(playerStats, playerPosAndRot);
+
+
+        string[] inventory = InventorySystem.instance.itemList.ToArray();
+
+        string[] quickSlots = GetQuickSlotsContent();
+        
+        return new PlayerData(playerStats, playerPosAndRot, inventory, quickSlots);
     }
 
+    private string[] GetQuickSlotsContent()
+    {
+        List<string> temp = new List<string>();
+
+        foreach(GameObject slot in EquipSystem.Instance.quickSlotsList)
+        {
+            if(slot.transform.childCount != 1)
+            {
+                string name = slot.transform.GetChild(1).name;
+                string str2 = "(Clone)";
+                string cleanName = name.Replace(str2, "");
+                temp.Add(cleanName);
+            }
+        }
+        return temp.ToArray();
+    }
 
     public void SavingTypeSwitch(AllGameData gameData, int slotNumber)
     {
@@ -139,10 +160,33 @@ public class SaveManager : MonoBehaviour
 
         PlayerState.Instance.playerBody.transform.rotation = Quaternion.Euler(loadedRotation);
 
+        // Setting the inventory content
+        foreach (string item in playerData.inventoryContent)
+        {
+            InventorySystem.instance.AddToInventory(item);
+        }
+
+        // Setting the quick slot content
+        foreach(string item in playerData.quickSlotsContent)
+        {
+            // Find the next free quick slot
+            GameObject availableSlot = EquipSystem.Instance.FindNextEmptySlot();
+
+            var itemToAdd = Instantiate(Resources.Load<GameObject>(item));
+
+            itemToAdd.transform.SetParent(availableSlot.transform, false);
+            
+        }
+
+
+        isLoading = false;
     }
     
     public void StartLoadedGame(int slotNumber)
     {
+
+        isLoading = true;
+
         SceneManager.LoadScene("GameScene");
 
         StartCoroutine(DelayedLoading(slotNumber));
@@ -163,11 +207,11 @@ public class SaveManager : MonoBehaviour
     {
         string json = JsonUtility.ToJson(gameData);
 
-        string encrypted = EncryptionDecryption(json);
+        //string encrypted = EncryptionDecryption(json);
 
         using (StreamWriter writer = new StreamWriter(jsonPathProject + fileName + slotNumber + ".json"))
         {
-            writer.Write(encrypted);
+            writer.Write(json);
             Debug.Log("Saved Game to Json file at" + jsonPathProject + fileName + slotNumber + ".json");
         };
     }
@@ -178,9 +222,9 @@ public class SaveManager : MonoBehaviour
         {
             string json = reader.ReadToEnd();
 
-            string decrypted = EncryptionDecryption(json);
+            //string decrypted = EncryptionDecryption(json);
 
-            AllGameData data = JsonUtility.FromJson<AllGameData>(decrypted);
+            AllGameData data = JsonUtility.FromJson<AllGameData>(json);
             return data;
         };
     }
