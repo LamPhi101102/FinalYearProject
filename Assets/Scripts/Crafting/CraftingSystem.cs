@@ -7,7 +7,11 @@ using TMPro;
 
 public class CraftingSystem : MonoBehaviour
 {
+
     public GameObject CraftingScreen;
+    public GameObject ShopScreen;
+    public GameObject MenuUI;
+    public GameObject MenuQuest;
     public GameObject InventoryScreen;
     public GameObject CraftingCategoriesScreen;
     public GameObject CraftingHelmetScreen;
@@ -70,7 +74,6 @@ public class CraftingSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        isOpen = false;
         // ================================= 6 Screen for Crafting in Crafting MainMenu ====================================
         // Weapon Button
         toolsBTN = CraftingScreen.transform.Find("WeaponButton").GetComponent<Button>();
@@ -257,12 +260,16 @@ public class CraftingSystem : MonoBehaviour
         {
             CraftingScreen.SetActive(true);
             InventoryScreen.SetActive(false);
-
+            ShopScreen.SetActive(false);
+            MenuUI.SetActive(false);
+            MenuQuest.SetActive(false);
             InventorySystem.instance.isOpen = false;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            InventorySystem.instance.isQuestMenuOpen = false;
+            InventorySystem.instance.isOpen = false;
+            InventorySystem.instance.isShopOpen = false;
             isOpen = true;
-
             SelectionManager.Instance.DisableSelection();
             SelectionManager.Instance.GetComponent<SelectionManager>().enabled = false;
             
@@ -279,18 +286,6 @@ public class CraftingSystem : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             isOpen = false;
             Cursor.visible = false;
-
-            SelectionManager.Instance.EnableSelection();
-            SelectionManager.Instance.GetComponent<SelectionManager>().enabled = true;
-        }
-        else if (Input.GetKeyDown(KeyCode.Escape) && isOpen)
-        {
-            CraftingScreen.SetActive(false);
-            CraftingCategoriesScreen.SetActive(false);
-            Cursor.lockState = CursorLockMode.Locked;
-            isOpen = false;
-            Cursor.visible = false;
-
             SelectionManager.Instance.EnableSelection();
             SelectionManager.Instance.GetComponent<SelectionManager>().enabled = true;
         }

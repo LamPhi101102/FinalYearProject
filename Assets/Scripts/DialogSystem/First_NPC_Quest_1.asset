@@ -51,8 +51,8 @@ MonoBehaviour:
   comebackCompleted: 
   finalWords: I hope this will make my father proud.
   coinReward: 25
-  rewardItem1: Stick
-  rewardItem2: Stick
+  rewardItem1: 
+  rewardItem2: 
   firstRequirementItem: Stone
   firstRequirementAmount: 3
   secondRequirementItem: 

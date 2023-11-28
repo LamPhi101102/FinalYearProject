@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class ShopManagerScript : MonoBehaviour
 {
+    public static ShopManagerScript instance { get; set; }
+
     public int[,] shopItems = new int[25, 25];
     public string[,] shopItemsResource = new string[25, 25];
     public float silvers;

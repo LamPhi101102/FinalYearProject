@@ -214,59 +214,42 @@ namespace StarterAssets
 
             // Check for inventory open/close key (e.g., "B" key for open and "Escape" for close).
             // ============================ Inventory Action ======================================
-            if (Input.GetKeyDown(KeyCode.B) && !isInventoryOpen)
+            if (Input.GetKeyDown(KeyCode.B) && !InventorySystem.instance.isOpen)
             {
                isCameraLocked = true;
                 isInventoryOpen = true;
             }
-            else if (Input.GetKeyDown(KeyCode.B) && isInventoryOpen)
+            else if (Input.GetKeyDown(KeyCode.B) && InventorySystem.instance.isOpen)
             {
                 // Close the inventory
                 isCameraLocked = false;
                 isInventoryOpen = false;
-            }
-            else if (Input.GetKeyDown(KeyCode.Escape) && isInventoryOpen)
-            {
-                // Close the inventory
-                isCameraLocked = false;
-                isInventoryOpen = false;
-            }
+            }           
             // ============================ Crafting Action ======================================
-            if (Input.GetKeyDown(KeyCode.I) && !isCraftingOpen)
+            if (Input.GetKeyDown(KeyCode.I) && !CraftingSystem.Instance.isOpen)
             {
                 isCameraLocked = true;
                 isCraftingOpen = true;
             }
-            else if (Input.GetKeyDown(KeyCode.I) && isCraftingOpen)
+            else if (Input.GetKeyDown(KeyCode.I) && CraftingSystem.Instance.isOpen)
             {
                 // Close the inventory
                 isCameraLocked = false;
                 isCraftingOpen = false;
-            }
-            else if (Input.GetKeyDown(KeyCode.Escape) && isCraftingOpen)
-            {
-                // Close the inventory
-                isCameraLocked = false;
-                isCraftingOpen = false;
-            }
+            }        
             // ============================ Shop Action ======================================
-            if (Input.GetKeyDown(KeyCode.H) && !isShopOpen)
+            if (Input.GetKeyDown(KeyCode.H) && !InventorySystem.instance.isShopOpen)
             {
                 isCameraLocked = true;
                 isShopOpen = true;
             }
-            else if (Input.GetKeyDown(KeyCode.H) && isShopOpen)
+            else if (Input.GetKeyDown(KeyCode.H) && InventorySystem.instance.isShopOpen)
             {
                 // Close the inventory
                 isCameraLocked = false;
                 isShopOpen = false;
             }
-            else if (Input.GetKeyDown(KeyCode.Escape) && isShopOpen)
-            {
-                // Close the inventory
-                isCameraLocked = false;
-                isShopOpen = false;
-            }
+            
             //============================== Menu Game ===================
             if (Input.GetKeyDown(KeyCode.M) && !isMenuOpen)
             {
@@ -278,11 +261,17 @@ namespace StarterAssets
                 isCameraLocked = false;
                 isMenuOpen = false;
             }
-            else if (Input.GetKeyDown(KeyCode.Escape) && isMenuOpen)
+            if (Input.GetKeyDown(KeyCode.Q) && !InventorySystem.instance.isQuestMenuOpen)
+            {
+                isCameraLocked = true;
+                isMenuOpen = true;
+            }
+            else if (Input.GetKeyDown(KeyCode.Q) && InventorySystem.instance.isQuestMenuOpen)
             {
                 isCameraLocked = false;
                 isMenuOpen = false;
             }
+
 
             if (DialogSystem.instance.dialogUIActive && isOpenDialog)
             { 

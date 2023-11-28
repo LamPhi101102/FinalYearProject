@@ -18,6 +18,9 @@ public class InventorySystem : MonoBehaviour
     public GameObject InventoryBag;
     public GameObject CraftingScreen;
     public GameObject ShopScreen;
+    public GameObject MenuUI;
+    public GameObject questMenu;
+    public bool isQuestMenuOpen;
     public GameObject CraftingCategoriesScreen;
     public List<GameObject> slotList = new List<GameObject>();
     public List<string> itemList = new List<string>();
@@ -78,10 +81,15 @@ public class InventorySystem : MonoBehaviour
             CraftingScreen.SetActive(false);
             CraftingCategoriesScreen.SetActive(false);
             CraftingSystem.Instance.isOpen = false;
+            ShopScreen.SetActive(false);
+            questMenu.SetActive(false);
+            MenuUI.SetActive(false);
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;  
             isOpen = true;
-
+            isQuestMenuOpen = false;
+            CraftingSystem.Instance.isOpen = false;
+            isShopOpen = false;
             SelectionManager.Instance.DisableSelection();
             SelectionManager.Instance.GetComponent<SelectionManager>().enabled = false;
         }
@@ -90,32 +98,28 @@ public class InventorySystem : MonoBehaviour
             InventoryScreen.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;       
             isOpen = false;
-            Cursor.visible = false;        
-            SelectionManager.Instance.EnableSelection();
-            SelectionManager.Instance.GetComponent<SelectionManager>().enabled = true;
-        }
-        else if (Input.GetKeyDown(KeyCode.Escape) && isOpen)
-        {
-            InventoryScreen.SetActive(false);
-            Cursor.lockState = CursorLockMode.Locked;
-            isOpen = false;
             Cursor.visible = false;
 
             SelectionManager.Instance.EnableSelection();
             SelectionManager.Instance.GetComponent<SelectionManager>().enabled = true;
         }
+        
 
         if (Input.GetKeyDown(KeyCode.H) && !isShopOpen)
         {
             ShopScreen.SetActive(true);
             InventoryScreen.SetActive(false);
             CraftingScreen.SetActive(false);
+            questMenu.SetActive(false);
             CraftingCategoriesScreen.SetActive(false);
             CraftingSystem.Instance.isOpen = false;
+            MenuUI.SetActive(false);
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             isShopOpen = true;
-
+            isOpen = false;
+            isQuestMenuOpen = false;
+            CraftingSystem.Instance.isOpen = false;
             SelectionManager.Instance.DisableSelection();
             SelectionManager.Instance.GetComponent<SelectionManager>().enabled = false;
         }
@@ -124,22 +128,42 @@ public class InventorySystem : MonoBehaviour
             ShopScreen.SetActive(false);
             InventoryScreen.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
+
             isShopOpen = false;
-            Cursor.visible = false;
-            SelectionManager.Instance.EnableSelection();
-            SelectionManager.Instance.GetComponent<SelectionManager>().enabled = true;
-        }
-        else if (Input.GetKeyDown(KeyCode.Escape) && isShopOpen)
-        {
-            ShopScreen.SetActive(false);
-            InventoryScreen.SetActive(false);
-            Cursor.lockState = CursorLockMode.Locked;
-            isShopOpen = false;
-            Cursor.visible = false;
 
             SelectionManager.Instance.EnableSelection();
             SelectionManager.Instance.GetComponent<SelectionManager>().enabled = true;
         }
+        
+        if (Input.GetKeyDown(KeyCode.Q) && !isQuestMenuOpen)
+        {
+            questMenu.SetActive(true);
+            InventoryScreen.SetActive(false);
+            CraftingScreen.SetActive(false);
+            CraftingCategoriesScreen.SetActive(false);
+            CraftingSystem.Instance.isOpen = false;
+            ShopScreen.SetActive(false);
+            MenuUI.SetActive(false);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            isOpen = false;
+            CraftingSystem.Instance.isOpen = false;
+            isShopOpen = false;
+            isQuestMenuOpen = true;
+            SelectionManager.Instance.DisableSelection();
+            SelectionManager.Instance.GetComponent<SelectionManager>().enabled = false;
+        }
+        else if (Input.GetKeyDown(KeyCode.Q) && isQuestMenuOpen)
+        {
+            questMenu.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            isQuestMenuOpen = false;
+
+            SelectionManager.Instance.EnableSelection();
+            SelectionManager.Instance.GetComponent<SelectionManager>().enabled = true;
+        }
+        
     }
 
 
@@ -161,7 +185,10 @@ public class InventorySystem : MonoBehaviour
         StartCoroutine(ClosePickupAlertAfterDelay());
 
         ReCalculateList();
-        CraftingSystem.Instance.RefreshNeededItems(); 
+        CraftingSystem.Instance.RefreshNeededItems();
+
+        QuestManager.instance.RefreshTrackerList();
+
     }
 
     IEnumerator ClosePickupAlertAfterDelay()
@@ -228,6 +255,8 @@ public class InventorySystem : MonoBehaviour
         }
         ReCalculateList();
         CraftingSystem.Instance.RefreshNeededItems();
+
+        QuestManager.instance.RefreshTrackerList();
     }
 
     public void ReCalculateList()
@@ -244,5 +273,18 @@ public class InventorySystem : MonoBehaviour
                 itemList.Add(result);
             }
         }
+    }
+
+    public int CheckItemAmount(string name)
+    {
+        int itemCounter = 0;
+        foreach(string item in itemList)
+        {
+            if(item == name)
+            {
+                itemCounter++;
+            }
+        }
+        return itemCounter;
     }
 }
