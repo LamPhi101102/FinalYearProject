@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b664109173f035c478624cbcc7e80e3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isTrashable: 0
+  isTrashable: 1
   thisName: Stone Armor
   thisDescription: Stone Armor
   thisFunctionality: Stone Armor
