@@ -117,14 +117,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isTrashable: 1
   thisName: Gold Ring
-  thisDescription: Gold Ring
-  thisFunctionality: Gold Ring
+  thisDescription: Increase 5 HP and 5 Stamina limits
+  thisFunctionality: Can equippable to increase the limit of HP and Stamina
   isConsumable: 0
   healthEffect: 0
   staminaEffect: 0
   calorieseffect: 0
-  healthIncrease: 0
-  staminaIncrease: 0
+  healthIncrease: 5
+  staminaIncrease: 5
   isEquippable: 1
   isInsideQuickSlot: 0
   wasInQuickSlot: 0

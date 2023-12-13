@@ -119,10 +119,13 @@ MonoBehaviour:
   thisName: Stick
   thisDescription: A Stick can use to create a weapon
   thisFunctionality: Crafting
-  isConsumable: 1
-  healthEffect: 10
-  staminaEffect: 5
-  calorieseffect: 5
+  isConsumable: 0
+  healthEffect: 0
+  staminaEffect: 0
+  calorieseffect: 0
+  healthIncrease: 0
+  staminaIncrease: 0
   isEquippable: 0
   isInsideQuickSlot: 0
+  wasInQuickSlot: 0
   isSelected: 0

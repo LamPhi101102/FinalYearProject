@@ -117,12 +117,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isTrashable: 1
   thisName: Big Water Water
-  thisDescription: Big Water Water
-  thisFunctionality: Big Water Water
+  thisDescription: '+ 10 HP, 5 Stamina '
+  thisFunctionality: Consume to Increase HP, Stamina
   isConsumable: 1
-  healthEffect: 0
-  staminaEffect: 10
-  calorieseffect: 10
+  healthEffect: 10
+  staminaEffect: 5
+  calorieseffect: 0
   healthIncrease: 0
   staminaIncrease: 0
   isEquippable: 0

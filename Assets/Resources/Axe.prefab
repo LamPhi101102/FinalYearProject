@@ -117,8 +117,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isTrashable: 1
   thisName: Axe
-  thisDescription: This is used to chop trees
-  thisFunctionality: 'Functions: Chopping'
+  thisDescription: Increase 10 HP and 10 Stamina limits
+  thisFunctionality: Can equippable to increase the limit of HP and Stamina
   isConsumable: 0
   healthEffect: 0
   staminaEffect: 0

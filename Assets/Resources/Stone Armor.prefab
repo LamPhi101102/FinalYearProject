@@ -117,14 +117,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isTrashable: 1
   thisName: Stone Armor
-  thisDescription: Stone Armor
-  thisFunctionality: Stone Armor
+  thisDescription: Increase 15 HP and 15 Stamina limits
+  thisFunctionality: Can equippable to increase the limit of HP and Stamina
   isConsumable: 0
   healthEffect: 0
   staminaEffect: 0
   calorieseffect: 0
-  healthIncrease: 0
-  staminaIncrease: 0
+  healthIncrease: 15
+  staminaIncrease: 15
   isEquippable: 1
   isInsideQuickSlot: 0
   wasInQuickSlot: 0

@@ -117,12 +117,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isTrashable: 1
   thisName: Watermelon
-  thisDescription: Watermelon
-  thisFunctionality: Watermelon
+  thisDescription: + 15 HP, 15 Stamina, and 15 Calories
+  thisFunctionality: Consume to Increase HP, Stamina, and Calories
   isConsumable: 1
-  healthEffect: 10
-  staminaEffect: 10
-  calorieseffect: 10
+  healthEffect: 15
+  staminaEffect: 15
+  calorieseffect: 15
   healthIncrease: 0
   staminaIncrease: 0
   isEquippable: 0

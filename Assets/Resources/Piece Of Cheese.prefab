@@ -117,12 +117,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isTrashable: 1
   thisName: Piece Of Cheese
-  thisDescription: Piece Of Cheese
-  thisFunctionality: Piece Of Cheese
+  thisDescription: + 3 HP and 3 Stamina
+  thisFunctionality: Consume to Increase HP and Stamina
   isConsumable: 1
-  healthEffect: 5
-  staminaEffect: 5
-  calorieseffect: 5
+  healthEffect: 3
+  staminaEffect: 3
+  calorieseffect: 0
   healthIncrease: 0
   staminaIncrease: 0
   isEquippable: 0

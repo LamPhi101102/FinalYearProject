@@ -117,14 +117,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isTrashable: 1
   thisName: Stone Shoulder
-  thisDescription: Stone Shoulder
-  thisFunctionality: Stone Shoulder
+  thisDescription: Increase 10 HP and 10 Stamina limits
+  thisFunctionality: Can equippable to increase the limit of HP and S
   isConsumable: 0
   healthEffect: 0
   staminaEffect: 0
   calorieseffect: 0
-  healthIncrease: 0
-  staminaIncrease: 0
+  healthIncrease: 10
+  staminaIncrease: 10
   isEquippable: 1
   isInsideQuickSlot: 0
   wasInQuickSlot: 0

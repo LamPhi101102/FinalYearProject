@@ -117,8 +117,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isTrashable: 1
   thisName: Sausage
-  thisDescription: Sausage
-  thisFunctionality: Sausage
+  thisDescription: + 15 HP, 15 Stamina, and 15 Calories
+  thisFunctionality: Consume to Increase HP, Stamina, and Calories
   isConsumable: 1
   healthEffect: 15
   staminaEffect: 15

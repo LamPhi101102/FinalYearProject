@@ -117,12 +117,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isTrashable: 1
   thisName: Bottle Water
-  thisDescription: Bottle Water
-  thisFunctionality: Bottle Water
+  thisDescription: '+ 5 HP, 3 Stamina '
+  thisFunctionality: Consume to Increase HP, Stamina
   isConsumable: 1
-  healthEffect: 0
-  staminaEffect: 5
-  calorieseffect: 5
+  healthEffect: 5
+  staminaEffect: 3
+  calorieseffect: 0
   healthIncrease: 0
   staminaIncrease: 0
   isEquippable: 0

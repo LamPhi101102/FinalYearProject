@@ -117,12 +117,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isTrashable: 1
   thisName: Orange
-  thisDescription: Orange
-  thisFunctionality: Orange
+  thisDescription: + 5 HP, 5 Stamina, 7 Calories
+  thisFunctionality: Consume to Increase HP, Stamina, and Calories
   isConsumable: 1
   healthEffect: 5
   staminaEffect: 5
-  calorieseffect: 5
+  calorieseffect: 7
   healthIncrease: 0
   staminaIncrease: 0
   isEquippable: 0

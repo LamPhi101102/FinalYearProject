@@ -25,6 +25,8 @@ public class PlayerState : MonoBehaviour
     public float currentCaloriesPercent;
     public float maxCaloriesPercent;
 
+    public GameObject menuGameOver;
+
     public bool isColoriesActions;
 
     // ======= Animation ===============
@@ -78,6 +80,11 @@ public class PlayerState : MonoBehaviour
     {
         Instantiate(ragdoll, transform.position, transform.rotation);
         Destroy(this.gameObject);
+        menuGameOver.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        SelectionManager.Instance.DisableSelection();
+        SelectionManager.Instance.GetComponent<SelectionManager>().enabled = false;
     }
 
         // Update is called once per frame
